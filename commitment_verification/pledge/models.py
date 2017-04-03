@@ -20,7 +20,7 @@ class Pledge(models.Model):
     congressman = models.ForeignKey(CongressMan) # 국회의원 모델과 1toN 관계 설정
     name = models.CharField(max_length=32) # 공약 이름
     status = models.IntegerField(default=0) # 공약 상태
-    status_event = models.BooleanField(default=False) # 공약 상태변경 이벤트 활성화 상태
+    event_status = models.BooleanField(default=False) # 공약 상태변경 이벤트 활성화 상태
     description = models.TextField(max_length=1024) # 공약에 대한 추가 설명
     created_at = models.DateTimeField(auto_now_add=True) # 공약 날짜
 
