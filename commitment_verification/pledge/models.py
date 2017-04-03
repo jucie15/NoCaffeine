@@ -5,12 +5,12 @@ from django.db import models
 class CongressMan(models.Model):
     # 국회의원 모델
     name = models.CharField(max_length=32) #국회의원 이름
-    profile_image = models.ImageField() # 프로필 사진
-    description = models.TextField(max_length=512) # 추가 정보
-    party = models.CharField(max_length=32) # 정당
-    constituency = models.CharField(max_length=32) # 선거구
-    email = models.CharField(max_length=64) # 이메일 주소
-    update_at = models.DateTimeField(auto_now=True) # 업데이트 날짜
+    # profile_image = models.ImageField() # 프로필 사진
+    description = models.TextField(max_length=512, null=True, blank=True) # 추가 정보
+    party = models.CharField(max_length=32, null=True, blank=True) # 정당
+    constituency = models.CharField(max_length=32, null=True, blank=True) # 선거구
+    email = models.CharField(max_length=64, null=True, blank=True) # 이메일 주소
+    update_at = models.DateTimeField(auto_now=True, null=True, blank=True) # 업데이트 날짜
 
     def __str__(self):
         return self.name
