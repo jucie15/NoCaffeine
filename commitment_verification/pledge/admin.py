@@ -6,6 +6,7 @@ class PledgeInline(admin.TabularInline):
 
 class CongressManAdmin(admin.ModelAdmin):
     model = CongressMan
+    list_display = ['id', 'name', 'party', 'constituency', 'updated_at']
     inlines = [
         PledgeInline,
     ]

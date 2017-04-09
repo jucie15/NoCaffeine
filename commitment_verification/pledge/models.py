@@ -10,7 +10,7 @@ class CongressMan(models.Model):
     party = models.CharField(max_length=32, null=True, blank=True) # 정당
     constituency = models.CharField(max_length=32, null=True, blank=True) # 선거구
     email = models.CharField(max_length=64, null=True, blank=True) # 이메일 주소
-    update_at = models.DateTimeField(auto_now=True, null=True, blank=True) # 업데이트 날짜
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True) # 업데이트 날짜
 
     class Meta():
         ordering =['id']

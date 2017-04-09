@@ -18,9 +18,8 @@ from django.contrib import admin
 from pledge import views
 
 urlpatterns = [
-    url(r'^$', views.index),
     url(r'^admin/', admin.site.urls),
-    url(r'^pledge/', include('pledge.urls', namespace='pledge')),
+    url(r'^', include('pledge.urls', namespace='pledge')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/', include('allauth.urls')),
 ]
