@@ -5,7 +5,7 @@ from pledge.models import CongressMan
 
 def index(request):
     # 인덱스 페이지
-    return HttpResponse('welcome')
+    return render(request, 'pledge/index.html')
 
 
 def congressman_list(request):
@@ -20,6 +20,7 @@ def congressman_list(request):
 
 def congressman_detail(request):
     # 국회의원 세부 페이지
+
     pass
 
 

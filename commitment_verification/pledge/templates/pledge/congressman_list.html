@@ -1,4 +1,6 @@
+{% load staticfiles %}
 {% for congressman in congressman_list %}
 
 {{ congressman | linebreaks }}
+<img src='{% static congressman.profile_image_path %}'>
 {% endfor %}

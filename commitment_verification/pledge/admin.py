@@ -1,10 +1,14 @@
 from django.contrib import admin
 from .models import *
 
+class PledgeInline(admin.TabularInline):
+    model = Pledge
 
 class CongressManAdmin(admin.ModelAdmin):
     model = CongressMan
-
+    inlines = [
+        PledgeInline,
+    ]
 
 class PledgeAdmin(admin.ModelAdmin):
     model = Pledge

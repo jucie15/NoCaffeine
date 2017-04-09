@@ -6,7 +6,7 @@
 .tox/
 */.DS_Store
 .DS_Store
-static/images/
+img/
 images/
 media/
 __pycache__
@@ -20,4 +20,3 @@ tests/.coverage
 build/
 tests/report/
 *.json
-db.sqlite3

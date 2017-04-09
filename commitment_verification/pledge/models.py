@@ -12,6 +12,9 @@ class CongressMan(models.Model):
     email = models.CharField(max_length=64, null=True, blank=True) # 이메일 주소
     update_at = models.DateTimeField(auto_now=True, null=True, blank=True) # 업데이트 날짜
 
+    class Meta():
+        ordering =['id']
+
     def __str__(self):
         return self.name
 
