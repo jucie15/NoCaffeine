@@ -35,13 +35,21 @@ def pledge_list(request):
 
     return render(request, 'pledge/pledge_list.html', context)
 
-def pledge_detail(request):
+def pledge_detail(request, pk):
     # 공약 세부
+    pledge = get_object_or_404(Pledge, pk=pk)
 
-    pass
+    context = {}
+    context['pledge'] = pledge
+
+    return render(request, 'pledge/pledge_detail.html', context)
 
 def pledge_status_event(request):
-    # 공약 상태 이벤트
+    # 공약 상태 변경 이벤트
+    pass
+
+def pledge_status_event_post(request):
+    # 공약 상태 변경 이벤트 근거 글 쓰기
     pass
 
 def search(request):

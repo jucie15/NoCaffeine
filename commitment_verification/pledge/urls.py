@@ -7,6 +7,6 @@ urlpatterns = [
     url(r'^congressman/$', views.congressman_list, name='congressman_list'),
     url(r'^congressman/(?P<pk>\d+)/$', views.congressman_detail, name='congressman_detail'),
     url(r'^pledge/$', views.pledge_list, name='pledge_list'),
+    url(r'^pledge/(?P<pk>\d+)/$', views.pledge_detail, name='pledge_detail'),
     url(r'^search/$', views.search, name='search'),
-
 ]
