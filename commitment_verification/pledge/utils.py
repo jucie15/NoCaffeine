@@ -34,27 +34,3 @@ def congressman_db_create():
                 congressman.email = mem_dic['이메일']
                 mem_dic = {} # 다음 의원을 위해 변수 초기화
                 congressman.save() # 디비에 저장
-
-
-
-#     for name, addr, latlng in zip(name_list,addr_list,latlng_list):
-
-#         lat = latlng.split(',')[0]
-#         lng = latlng.split(',')[1]
-#         sch = School()
-
-#         sch.name = name
-#         sch.address = addr
-#         sch.save()
-
-#         sch_loc = SchoolLocation()
-#         print("sch_loc1")
-#         sch_loc.school = sch
-#         print("sch_loc2")
-
-#         sch_loc.point = 'POINT(' + lng +' ' + lat + ')'
-#         print(sch_loc.point)
-
-#         sch_loc.save()
-
-# school_db_create()

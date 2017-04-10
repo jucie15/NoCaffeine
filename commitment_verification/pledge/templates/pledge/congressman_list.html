@@ -2,5 +2,7 @@
 {% for congressman in congressman_list %}
 
 {{ congressman | linebreaks }}
-<img src='{% static congressman.profile_image_path %}'>
+<a href="{% url 'pledge:congressman_detail' congressman.id %}">
+    <img src='{% static congressman.profile_image_path %}'>
+</a>
 {% endfor %}

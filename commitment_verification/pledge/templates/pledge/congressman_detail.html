@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h3> {{ congressman }} </h3>
+{% for pledge in congressman.pledge_set.all %}
+    {{ pledge | linebreaks }}
+{% endfor %}
+</body>
+</html>

@@ -8,7 +8,6 @@ def index(request):
     # 인덱스
     return render(request, 'pledge/index.html')
 
-
 def congressman_list(request):
     # 국회의원 리스트
     congressman_list = CongressMan.objects.all()
@@ -18,11 +17,14 @@ def congressman_list(request):
 
     return render(request, 'pledge/congressman_list.html', context)
 
-
 def congressman_detail(request, pk):
     # 국회의원 세부
-    pass
+    congressman = get_object_or_404(CongressMan, pk=pk)
 
+    context = {}
+    context['congressman'] = congressman
+
+    return render(request, 'pledge/congressman_detail.html', context)
 
 def pledge_list(request):
     # 공약 리스트
@@ -35,25 +37,30 @@ def pledge_list(request):
 
 def pledge_detail(request):
     # 공약 세부
-    pass
 
+    pass
 
 def pledge_status_event(request):
     # 공약 상태 이벤트
     pass
 
-def search(reqeust):
+def search(request):
     # 검색바를 통한 검색
+
+    '''
+    검색 쿼리 추가 구현 지금은 기본 검색만 가능.
+    '''
+
     keyword = request.GET.get('q', '') # 검색 키워드
     # 국회의원 검색 결과
     condition = Q(name__icontains=keyword) | Q(description__icontains=keyword) | Q(party__icontains=keyword) | Q(constituency__icontains=keyword) # 검색 조건
 
-    search_congressman_list = CongressMan.objects.filter(condition)
+    search_congressman_list = CongressMan.objects.filter(condition) # 국회의원 검색 결과 리스트
 
     # 공약 검색 결과
-    condition = Q(congressman_name__icontains=keyword) | Q(title__icontains=keyword) | Q(status__icontains=keyword) | Q(description__icontains=keyword)
+    condition = Q(title__icontains=keyword) | Q(status__icontains=keyword) | Q(description__icontains=keyword) # 검색 조건
 
-    search_pledge_list = Pledge.objects.filter(condition)
+    search_pledge_list = Pledge.objects.filter(condition) # 공약 검색 결과 리스트
 
     context = {}
     context['search_congressman_list'] = search_congressman_list

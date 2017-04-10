@@ -4,14 +4,14 @@
     <title></title>
 </head>
 <body>
-국회의원 검색 결과
+<h2>국회의원 검색 결과</h2>
 {% for congressman in search_congressman_list %}
-
+    {{ congressman | linebreaks }}
 {% endfor %}
 
-공약 검색 결과
+<h2>공약 검색 결과</h2>
 {% for pledge in search_pledge_list %}
-
+    {{ pledge }}
 {% endfor %}
 
 </body>
