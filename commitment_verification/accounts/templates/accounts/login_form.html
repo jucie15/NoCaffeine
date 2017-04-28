@@ -1,12 +1,5 @@
 {% load socialaccount %}
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" />
-    </form>
     <h3>Social Login</h3>
     <ul>
         {% for provider in providers %}
