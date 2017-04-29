@@ -1,7 +1,8 @@
 {% extends "pledge/layout.html" %}
 
 {% block content %}
-    <div class="congressman-list-row container" style="margin:0 auto;">
+<div class='container'>
+    <div class="congressman-list-row" style="margin:0 auto;">
         {% for congressman in congressman_list %}
             {% load staticfiles %}
             <a href="{% url 'pledge:congressman_detail' congressman.id %}" style="color:#000;">
@@ -18,5 +19,6 @@
                 </div>
             </a>
         {% endfor %}
-    </div><!-- congressman_list_row -->
+    </div><!-- .congressman_list_row -->
+</div><!-- .container-fluid -->
 {% endblock %}

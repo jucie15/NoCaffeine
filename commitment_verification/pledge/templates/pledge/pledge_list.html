@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-{% for pledge in pledge_list %}
-    {{ pledge.title }}
-{% endfor %}
-</body>
-</html>
+{% extends "pledge/layout.html" %}
+
+{% block content %}
+    {% for pledge in pledge_list %}
+        {{ pledge.title }}
+    {% endfor %}
+{% endblock %}
