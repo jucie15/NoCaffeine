@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'pledge/css/magnific-popup.css' %}" />
     <link rel="stylesheet" href="{% static 'pledge/css/font-awesome.css' %}" />
     <link rel="stylesheet" href="{% static 'pledge/css/responsive.css' %}" />
+    <link rel="stylesheet" href="{% static 'pledge/css/main.css' %}" />
 
     {% block extra_style %}
     {% endblock %}
@@ -38,7 +39,7 @@
 
     <!-- HEADER -->
     <header id="header">
-        <nav class="navbar st-navbar navbar-fixed-top">
+        <nav class="navbar st-navbar navbar-default">
             <div class="container">
 
                 <h1 style="float:left"><a href="{% url 'pledge:index' %}">PLEDGE</a></h1>
@@ -47,7 +48,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#header">Home</a></li>
                         <li><a href="{% url 'pledge:congressman_list' %}">국회의원 목록</a></li>
-                        <li><a href="#our-works">공약 목록</a></li>
+                        <li><a href="{% url 'pledge:pledge_list' %}">공약 목록</a></li>
                         <li><a href="#pricing">피드백</a></li>
                         <li><a href="#our-team">후원</a></li>
                         {% if not user.is_authenticated %}

@@ -1,0 +1,14 @@
+.pledge_detail{
+
+    top:0;
+    margin:0 auto;
+    height:100%;
+    text-align:center;
+}
+
+.propic {
+    border-radius: 10px;
+    width:auto; height:auto;
+    max-width:200px;
+    max-height: 200px;
+}

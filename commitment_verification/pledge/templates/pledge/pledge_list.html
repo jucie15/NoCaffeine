@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+
+
+{% extends "pledge/layout.html" %}
+{% block content %}
+
 {% for pledge in pledge_list %}
-    {{ pledge.title }}
+    국회의원 : {{ pledge.congressman }} </br>
+    공약 이름 : {{ pledge.title }}</br>
+    공약 상태 : {{ pledge.status }} </br>
+    공약 내용 : {{ pledge.description }} </br>
+    공약 날짜 : {{ pledge.created_at }} </br>
 {% endfor %}
-</body>
-</html>
+
+
+{% endblock %}

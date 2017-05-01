@@ -1,9 +1,178 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    {{ pledge }}
-</body>
-</html>
+{% extends "pledge/layout.html" %}
+{% block content %}
+
+<!-- <div style="border:1px solid red;  width:500px;display:inline-block;">
+{% load staticfiles %}
+    <div class="congressman" style="float:left;">
+        <img src="{% static pledge.congressman.profile_image_path %}" class="img-rounded" alt="Cinque Terre" width="120" height="120" >
+    </div>
+    <div >
+        이름 : {{ pledge.congressman.name }} <br>
+        소속 : {{ pledge.congressman.party }} <br>
+        선거구 : {{ pledge.congressman.constituency }} <br>
+        이메일 : {{ pledge.congressman.email }}
+    </div>
+</div> -->
+<div class="container">
+        <!-- ===========================
+        HEADER
+        ============================ -->
+        <div id="header" class="row">
+            {% load staticfiles %}
+            <div class="col-sm-2" style="overflow:hidden;">
+                <img class="propic img-rounded" src="{% static pledge.congressman.profile_image_path %}" alt="">
+            </div>
+            <!-- photo end-->
+
+            <div class="col-sm-10">
+                <div class="cv-title">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <h1>{{pledge.congressman}}</h1>
+                        </div>
+                        <div class="col-sm-5 text-right dl-share">
+                            <!-- AddToAny BEGIN -->
+                            <a class="a2a_dd btn btn-default" href=""><span class="fa fa-share "></span> Share</a>
+                            <script type="text/javascript">
+                                var a2a_config = a2a_config || {};
+                                a2a_config.linkname = "Minimal CV by EvenFly";
+                                a2a_config.num_services = 6;
+                                a2a_config.prioritize = ["facebook", "twitter", "google_plus", "linkedin", "pinterest", "email"];
+                            </script>
+                            <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+                            <!-- AddToAny END -->
+
+                            <a class="btn btn-success" href=""><span class="fa fa-download"></span> Download</a>
+                        </div>
+                    </div>
+                    <h2>국회의원</h2>
+                </div><!-- Title end-->
+
+                <!-- ===========================
+                SOCIAL & CONTACT
+                ============================ -->
+                <div class="row">
+                    <div class="col-sm-4">
+                        <ul class="list-unstyled">
+                            <li><a href=""><span class="social fa fa-home"></span>{{pledge.congressman.party}}</a>
+                            </li>
+                            <li><a href=""><span class="social fa fa-facebook"></span>{{pledge.congressman.description}}</a>
+
+
+                        </ul>
+                    </div><!-- social 1st col end-->
+
+                    <div class="col-sm-4">
+                        <ul class="list-unstyled">
+                            <li><a href=""><span class="social fa fa-skype"></span>{{pledge.congressman.constituency}}</a>
+
+                            </li>
+                            <li><a href=""><span class="social fa fa-twitter"></span>Twitter</a>
+                            </li>
+                            <li><a href=""><span class="social fa fa-linkedin"></span>Linkedin</a>
+                            </li>
+                        </ul>
+                    </div><!-- social 2nd col end-->
+
+                    <div class="col-sm-4">
+                        <ul class="list-unstyled">
+                            <li><a href="mailto:support@evenfly.com"><span class="social fa fa-envelope-o"></span>{{pledge.congressman.email}}</a>
+                            <li><a href=""><span class="social fa fa-dribbble"></span>Dribbble</a>
+                            </li>
+                            <li><a href=""><span class="social fa fa-instagram"></span>Instagram</a>
+                            </li>
+                        </ul>
+                    </div><!-- social 3rd col end-->
+                </div><!-- header social end-->
+            </div><!-- header right end-->
+        </div><!-- header end-->
+
+<!-- <div>
+    공약 이름 : {{ pledge.title }}</br>
+    공약 상태 : {{ pledge.status }} </br>
+    공약 내용 : {{ pledge.description }} </br>
+    공약 날짜 : {{ pledge.created_at }} </br>
+</div> -->
+
+<div class="col-md-8 mainleft" style="background-color:#fff;">
+            <div id="statement" class="row mobmid">
+                <div class="col-sm-1">
+                    <span class="secicon fa fa-user"></span>
+                </div><!--icon end-->
+
+                <div class="col-sm-11">
+                    <h3>공약 </h3>
+                    {% for pledge in congressman.pledge_set.all %}
+        <a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge | linebreaks }}</a>
+                    {% endfor%}
+
+
+
+                </div><!--info end-->
+            </div><!--personal statement end-->
+
+            <hr>
+
+            <div id="education" class="row mobmid">
+                <div class="col-sm-1">
+                    <span class="secicon fa fa-graduation-cap"></span>
+                </div><!--icon end-->
+
+                <div class="col-sm-11">
+                    <h3>Education &amp; Certification</h3>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4>MSc in Design &amp; Fine Art</h4>
+                            <p class="sub"><a href="">Ideal Institute of Science and Technology</a>
+                            </p>
+                            <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration, Information Design, Packaging Design and Website Design</p>
+                        </div>
+
+                        <div class="year col-md-3">
+                            <p>2009-2011</p>
+                        </div>
+                    </div><!--Education & Certification 1 end-->
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4>BSc in Graphic Design</h4>
+                            <p class="sub"><a href="">Ideal Institute of Science and Technology</a>
+                            </p>
+                            <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration, Information Design, Packaging Design and Website Design</p>
+                        </div>
+
+                        <div class="year col-md-3">
+                            <p>2006-2009</p>
+                        </div>
+                    </div><!--Education & Certification 2 end-->
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4>Diploma in Graphic Design</h4>
+                            <p class="sub"><a href="">Ideal Institute of Science and Technology</a>
+                            </p>
+                            <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration, Information Design, Packaging Design and Website Design</p>
+                        </div>
+
+                        <div class="year col-md-3">
+                            <p>2003-2006</p>
+                        </div>
+                    </div><!--Education & Certification 3 end-->
+                </div>
+            </div><!--Education & Certifications end-->
+
+
+
+            <!-- ===========================
+            JOB EXPERIENCES
+            ============================ -->
+
+        </div><!--left end-->
+
+
+{% endblock %}
