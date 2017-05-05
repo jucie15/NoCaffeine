@@ -52,6 +52,10 @@ def pledge_status_event_post(request):
     # 공약 상태 변경 이벤트 근거 글 쓰기
     pass
 
+def pledge_coment_new(request, post_pk):
+    # 공약 디테일 내 댓글 달기
+    pass
+
 def search(request):
     # 검색바를 통한 검색
 
