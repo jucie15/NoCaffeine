@@ -11,4 +11,27 @@
     max-width:180px;
 }
 
+#search {
+    max-width:600px;
+    border-radius: 5px;
+    text-align: left;
+}
+.dropdown{
+    display:inline-block;
+}
+.category-dropdown {
+    display:inline-block;
+}
+.form-control {
+    display:inline-block;
+}
+.category-dropdown a:hover, .dropdown-menu>li>a:hover{
+    color:blue;
+}
+#search button.btn.btn-primary {
+    right:-10px;
+    background-color: blue;
+    border-radius: 0 5px 5px 0;
+    height:100%;
+}
 
