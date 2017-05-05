@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from django.shortcuts import reverse
 
 class CongressMan(models.Model):
     # 국회의원 모델
@@ -30,14 +30,21 @@ class Pledge(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('pledge:pledge_detail', args = [self.pk])
+
 class Comment(models.Model):
     # 각 공약에 대한 댓글 모델
-    pledge = models.ForeignKey(Pledge)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    message = models.TextField()
+    pledge = models.ForeignKey(Pledge) # 해당 공약과 1:N 관계 설정
+    user = models.ForeignKey(settings.AUTH_USER_MODEL) # 해당 댓글을 쓴 유저와 1:N 관계 설정
+    message = models.TextField() # 댓글 내용
 
     class Meta:
         ordering = ['-id']
+
+    def __str__(self):
+        return "{}의 댓글 {}".format(self.pledge, self.message)
+
 
 class PledgeEvent(models.Model):
     # 공약 상태 변경 이벤트 모델
