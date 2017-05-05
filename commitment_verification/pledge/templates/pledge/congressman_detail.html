@@ -35,17 +35,14 @@
 
 {% block content %}
 
-   <!--  {% for pledge in congressman.pledge_set.all %}
-        <a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge | linebreaks }}</a> -->
-
-         <div class="container">
+        <div class="container">
         <!-- ===========================
         HEADER
         ============================ -->
         <div id="header" class="row">
             {% load staticfiles %}
             <div class="col-sm-2">
-                <img class="propic img-rounded" src="{% static pledge.congressman.profile_image_path %}" alt="">
+                <img class="propic img-rounded" src="{% static congressman.profile_image_path %}" alt="">
             </div>
             <!-- photo end-->
 
@@ -53,7 +50,7 @@
                 <div class="cv-title">
                     <div class="row">
                         <div class="col-sm-7">
-                            <h1>{{congressman}}</h1>
+                            <h1>{{ congressman }}</h1>
                         </div>
 
                     </div>
@@ -241,5 +238,4 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="{% static 'pledge/js/jquery.nicescroll.min.js' %}"></script>
     <script src="{% static 'pledge/js/evenfly.js' %}" "></script> -->
-    {% endfor %}
 {% endblock %}
