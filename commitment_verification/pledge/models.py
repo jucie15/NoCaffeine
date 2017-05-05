@@ -30,6 +30,15 @@ class Pledge(models.Model):
     def __str__(self):
         return self.title
 
+class Comment(models.Model):
+    # 각 공약에 대한 댓글 모델
+    pledge = models.ForeignKey(Pledge)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    message = models.TextField()
+
+    class Meta:
+        ordering = ['-id']
+
 class PledgeEvent(models.Model):
     # 공약 상태 변경 이벤트 모델
     pledge = models.OneToOneField(Pledge) # 해당 공약과 1:1 관계 설정
