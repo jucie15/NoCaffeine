@@ -20,3 +20,8 @@ tests/.coverage
 build/
 tests/report/
 *.json
+.idea/Nocaffeine.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
