@@ -34,4 +34,22 @@
     border-radius: 0 5px 5px 0;
     height:100%;
 }
-
+/*.row {
+    height:500px;
+    background-image: url(../img/slider/sunset.jpg);
+    background-size:cover;
+}*/
+.user-account {
+    background-color: #fff;
+}
+.social_login li{
+    height:30px;
+    margin-bottom:20px;
+    border-radius: 7px;
+}
+.Kakao {
+    background-color: rgb(250, 250, 0);
+}
+.Naver {
+    background-color:#1EDC00;
+}
