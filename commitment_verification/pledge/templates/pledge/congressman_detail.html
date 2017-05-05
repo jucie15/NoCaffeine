@@ -35,8 +35,6 @@
 
 {% block content %}
 
-   <!--  {% for pledge in congressman.pledge_set.all %}
-        <a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge | linebreaks }}</a> -->
 
          <div class="container">
         <!-- ===========================
@@ -45,7 +43,7 @@
         <div id="header" class="row">
             {% load staticfiles %}
             <div class="col-sm-2">
-                <img class="propic img-rounded" src="{% static pledge.congressman.profile_image_path %}" alt="">
+                <img class="propic img-rounded" src="{% static congressman.profile_image_path %}" alt="">
             </div>
             <!-- photo end-->
 
@@ -53,7 +51,6 @@
                 <div class="cv-title">
                     <div class="row">
                         <div class="col-sm-7">
-                            <h1>{{congressman}}</h1>
                             <h1>{{ congressman }}</h1>
                         </div>
 
@@ -69,20 +66,12 @@
                         <ul class="list-unstyled">
                             <li><a href=""><span class="social fa fa-home"></span>{{congressman.party}}</a>
                             </li>
-                            <li><a href=""><span class="social fa fa-facebook"></span>{{congressman.description}}</a>
-
-
                         </ul>
                     </div><!-- social 1st col end-->
 
                     <div class="col-sm-4">
                         <ul class="list-unstyled">
-                            <li><a href=""><span class="social fa fa-skype"></span>{{congressman.constituency}}</a>
-
-                            </li>
-                            <li><a href=""><span class="social fa fa-twitter"></span>Twitter</a>
-                            </li>
-                            <li><a href=""><span class="social fa fa-linkedin"></span>Linkedin</a>
+                            <li><a href=""><span class="social fa fa-cloud"></span>{{congressman.constituency}}</a>
                             </li>
                         </ul>
                     </div><!-- social 2nd col end-->
@@ -90,12 +79,14 @@
                     <div class="col-sm-4">
                         <ul class="list-unstyled">
                             <li><a href="mailto:support@evenfly.com"><span class="social fa fa-envelope-o"></span>{{congressman.email}}</a>
-                            <li><a href=""><span class="social fa fa-dribbble"></span>Dribbble</a>
-                            </li>
-                            <li><a href=""><span class="social fa fa-instagram"></span>Instagram</a>
-                            </li>
                         </ul>
                     </div><!-- social 3rd col end-->
+                    </hr>
+                    <div class="col-sm-12">
+                    <ul class="list-unstyled">
+                    <li><a href=""><span class="social fa fa-facebook"></span>{{congressman.description}}</a></li>
+                    </ul>
+                    </div>
                 </div><!-- header social end-->
             </div><!-- header right end-->
         </div><!-- header end-->
@@ -242,5 +233,5 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="{% static 'pledge/js/jquery.nicescroll.min.js' %}"></script>
     <script src="{% static 'pledge/js/evenfly.js' %}" "></script> -->
-    {% endfor %}
+
 {% endblock %}

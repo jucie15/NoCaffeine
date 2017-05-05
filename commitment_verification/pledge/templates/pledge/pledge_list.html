@@ -1,13 +1,36 @@
 {% extends "pledge/layout.html" %}
 {% block content %}
+<div class="col-xs-12" style="margin-top: 20px;">
 
-{% for pledge in pledge_list %}
-    국회의원 : {{ pledge.congressman }} </br>
-    공약 이름 : {{ pledge.title }}</br>
-    공약 상태 : {{ pledge.status }} </br>
-    공약 내용 : {{ pledge.description }} </br>
-    공약 날짜 : {{ pledge.created_at }} </br>
-{% endfor %}
+<span class="secicon fa fa-user"><strong style="font-size: 25px;">공약 목록</strong></span>
 
 
+                <table class="table-responsive">
+                    <table class="table">
+                        <tr class="success">
+                            <td><strong>공약 번호</strong></td>
+                            <!-- 국회의원별로 공약이 안 나눠져 있어 번호혼동됨 -->
+                            <td><strong>공약 제목</strong></td>
+                            <td><strong>공약 설명</strong></td>
+                            <td><strong>진행 상태</strong></td>
+                            <td><strong>국회 의원</strong></td>
+                        </tr>
+
+
+                        {% for pledge in pledge_list %}
+                        <tr>
+                            <td>{{pledge.pk}}</td>
+                            <td><a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge.title }}</a></td>
+                            <td>{{pledge.description|truncatechars:10}}</td>
+                            <td>
+                            {{pledge.status}}</td>
+                            <td>
+                            {{pledge.congressman}}</td>
+                        </tr>
+
+                        {% endfor%}
+                        </table>
+                        </table>
+</div>
+s
 {% endblock %}
