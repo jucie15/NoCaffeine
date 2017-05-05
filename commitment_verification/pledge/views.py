@@ -76,7 +76,7 @@ def pledge_comment_new(request, pledge_pk):
 
             return redirect(comment.pledge)
     else:
-        # 포스트가 아닐 경우 빈 폼 생성
+        # 포스트 요청이 아닐 경우 빈 폼 생성
         form = CommentForm()
 
     return render(request, 'pledge/comment_form.html', {
