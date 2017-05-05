@@ -15,13 +15,18 @@ class CongressManAdmin(admin.ModelAdmin):
 class PledgeAdmin(admin.ModelAdmin):
     model = Pledge
 
+class CommentAdmin(admin.ModelAdmin):
+    model = Comment
+
 class PledgeEventAdmin(admin.ModelAdmin):
     model = PledgeEvent
 
 class PledgeEventPostAdmin(admin.ModelAdmin):
     model = PledgeEventPost
 
+
 admin.site.register(CongressMan, CongressManAdmin)
 admin.site.register(Pledge, PledgeAdmin)
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(PledgeEvent, PledgeEventAdmin)
 admin.site.register(PledgeEventPost, PledgeEventPostAdmin)

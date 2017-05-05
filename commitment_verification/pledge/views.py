@@ -1,7 +1,9 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponse
 from django.db.models import Q
 from pledge.models import *
+from pledge.forms import CommentForm
 
 
 def index(request):
@@ -38,9 +40,12 @@ def pledge_list(request):
 def pledge_detail(request, pk):
     # 공약 세부
     pledge = get_object_or_404(Pledge, pk=pk)
+    comment_form = CommentForm()
 
     context = {}
     context['pledge'] = pledge
+    context['comment_form'] = comment_form
+
 
     return render(request, 'pledge/pledge_detail.html', context)
 
@@ -52,12 +57,75 @@ def pledge_status_event_post(request):
     # 공약 상태 변경 이벤트 근거 글 쓰기
     pass
 
+@login_required
+def pledge_comment_new(request, pledge_pk):
+    # 공약 디테일 내 댓글 달기
+    pledge = get_object_or_404(Pledge, pk=pledge_pk)
+
+    if request.method == 'POST':
+        # 포스트 요청일 경우
+        form = CommentForm(request.POST, request.FILES) # 받아온 데이터를 통해 폼 인스턴스 생성
+
+        if form.is_valid():
+            # 폼에 데이터가 유효할 경우
+            comment = form.save(commit=False) # 디비에 저장하지 않고 인스턴스 생성
+            comment.user = request.user
+            comment.pledge = pledge
+            comment.save() # 유저와 공약 연결 후 디비에 저장
+            messages.success(request, '새 댓글을 저장했습니다.')
+
+            return redirect(comment.pledge)
+    else:
+        # 포스트 요청이 아닐 경우 빈 폼 생성
+        form = CommentForm()
+
+    return render(request, 'pledge/comment_form.html', {
+        'form' : form,
+        }) # 포스트 요청이 아닐 경우 빈 폼으로 페이지 렌더링
+
+@login_required
+def pledge_comment_delete(request, pledge_pk, comment_pk):
+    # 공약 디테일 내 댓글 지우기
+    comment = get_object_or_404(Comment, pk=comment_pk)
+
+    if comment.user != request.user:
+        # 댓글 작성자와 현재 유저가 다를 경우
+        messages.warning(request, '작성자만 삭제할 수 있습니다.')
+    else:
+        # 작성자와 동일할 경우
+        comment.delete() # 댓글 삭제
+        messages.success(request, '댓글을 삭제했습니다.')
+
+    return redirect(comment.pledge)
+
+@login_required
+def pledge_comment_edit(request, pledge_pk, comment_pk):
+    # 공약 디테일 내 댓글 수정
+    comment = get_object_or_404(Comment, pk=comment_pk)
+
+    if comment.user != request.user:
+        # 댓글 작성자와 현재 유저가 다를 경우 해당 공약페이지로 리다이렉트
+        messages.warning(request, '댓글 작성자만 수정할 수 있습니다.')
+        return reditrect(comment.pledge)
+
+    if request.method == 'POST':
+        # 포스트 요청일 경우
+        form = CommentForm(request.POST, request.FILES, instance=comment) # 받아온 데이터와 현재 댓글 인스턴스를 통해 폼 인스턴스 생성
+
+        if form.is_valid():
+            comment = form.save() # 수정된 댓글 저장
+            messages.success(request, '기존 댓글을 수정헀습니다.')
+            return redirect(comment.pledge)
+    else:
+        form = CommentForm(instance=comment) # 현재 댓글 인스턴스 정보를 가진 폼 인스턴스 생성
+
+    return render(request, 'pledge/comment_form.html', {
+        'form':form,
+        })
+
+
 def search(request):
     # 검색바를 통한 검색
-
-    '''
-    검색 쿼리 추가 구현 지금은 기본 검색만 가능.
-    '''
 
     keyword = request.GET.get('q', '') # 검색 키워드
     # 국회의원 검색 결과
