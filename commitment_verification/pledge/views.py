@@ -40,9 +40,12 @@ def pledge_list(request):
 def pledge_detail(request, pk):
     # 공약 세부
     pledge = get_object_or_404(Pledge, pk=pk)
+    comment_form = CommentForm()
 
     context = {}
     context['pledge'] = pledge
+    context['comment_form'] = comment_form
+
 
     return render(request, 'pledge/pledge_detail.html', context)
 
