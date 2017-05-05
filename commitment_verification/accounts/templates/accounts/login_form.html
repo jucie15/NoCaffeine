@@ -1,9 +1,11 @@
 {% extends "pledge/layout.html" %}
 {% load socialaccount %}
+
 {% block content %}
-    <section class="container">
+    <div class="container">
         <div class="row text-center">
-            <div class="user-account col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+
             <h3>소셜 로그인</h3>
             <ul class="social_login" style="list-style: none;">
                 {% for provider in providers %}
@@ -22,7 +24,6 @@
             </ul>
             </div>
         </div>
-    </section>
-    sdf
+    </div>
 {% endblock %}
 
