@@ -134,9 +134,14 @@ def search(request):
     search_congressman_list = CongressMan.objects.filter(condition) # 국회의원 검색 결과 리스트
 
     # 공약 검색 결과
-    condition = Q(title__icontains=keyword) | Q(status__icontains=keyword) | Q(description__icontains=keyword) # 검색 조건
+    search_pledge_list = []
+    for congressman in search_congressman_list:
+        search_pledge = Pledge.objects.filter(congressman=congressman)
+        search_pledge_list.append(search_pledge)
 
-    search_pledge_list = Pledge.objects.filter(condition) # 공약 검색 결과 리스트
+    # condition = Q(title__icontains=keyword) | Q(status__icontains=keyword) | Q(description__icontains=keyword) # 검색 조건
+
+    # search_pledge_list = Pledge.objects.filter(condition) # 공약 검색 결과 리스트
 
     context = {}
     context['search_congressman_list'] = search_congressman_list
