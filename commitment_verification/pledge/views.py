@@ -129,15 +129,20 @@ def search(request):
 
     keyword = request.GET.get('q', '') # 검색 키워드
     # 국회의원 검색 결과
-    condition = Q(name__icontains=keyword) | Q(description__icontains=keyword) | Q(party__icontains=keyword) | Q(constituency__icontains=keyword) # 검색 조건
+    condition = (Q(name__icontains=keyword) |
+    Q(description__icontains=keyword) |
+    Q(party__icontains=keyword) |
+    Q(constituency__icontains=keyword)) # 국회의원 검색 조건
 
     search_congressman_list = CongressMan.objects.filter(condition) # 국회의원 검색 결과 리스트
 
+    condition = (Q(congressman__name__icontains=keyword) |
+    Q(congressman__description__icontains=keyword) |
+    Q(congressman__party__icontains=keyword) |
+    Q(congressman__constituency__icontains=keyword)) # 공약 검색 조건(검색된 국회의원들의 공약을 검색)
+
     # 공약 검색 결과
-    search_pledge_list = []
-    for congressman in search_congressman_list:
-        search_pledge = Pledge.objects.filter(congressman=congressman)
-        search_pledge_list.append(search_pledge)
+    search_pledge_list = Pledge.objects.filter(condition) # 공역 검색 결과 리스트
 
     # condition = Q(title__icontains=keyword) | Q(status__icontains=keyword) | Q(description__icontains=keyword) # 검색 조건
 
