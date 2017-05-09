@@ -1,8 +1,8 @@
 {% extends "pledge/layout.html" %}
 
 {% block content %}
-    <div class="infinite-container">
-        <div class="infinite-item">
+    <div class="infinite-container"><!-- 페이지네이션된 항목들이 표시될 컨테이너 /.infinite-more-link가 화면에 뜰 때마다 로딩된다.-->
+        <div class="infinite-item"> <!-- 표시될 항목 -->
             <div class='container'>
                 <div class="congressman-list-row" style="margin:0 auto;">
                     {% for congressman in congressmans %}
@@ -27,6 +27,7 @@
     </div><!-- /.infinite-container -->
 
     {% if congressmans.has_next %}
+        <!-- 다음페이지가 없을때까지 .infinite-more-link 표시-->
         <a class="infinite-more-link" href="?page={{ congressmans.next_page_number }}">More</a>
     {% endif %}
 

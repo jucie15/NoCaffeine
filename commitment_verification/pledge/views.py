@@ -15,14 +15,20 @@ def congressman_list(request):
     # 국회의원 리스트
     congressman_list = CongressMan.objects.all() # 국회의원 리스트
 
-    page = request.GET.get('page', 1)
-    paginator = Paginator(congressman_list, 12)
+    page = request.GET.get('page', 1) # 페이지 번호를 받아온다.
+    paginator = Paginator(congressman_list, 15) # 페이지 당 15개씩 표현
+
     try:
+        # 페이지 번호가 있으면 해당 페이지로 이동
         congressmans = paginator.page(page)
     except PageNotAnInteger:
+        # 페이지 번호가 숫자가 아닐 경우 첫페이지로 이동
         congressmans = paginator.page(1)
     except EmptyPage:
+        # 페이지가 비어있을 경우 paginator.num_page = 총 페이지 개수
+        # paginator.num_page = 국회의원 총 수(300) / 페이지 나눔 개수(15
         congressmans = paginator.page(paginator.num_pages)
+
     return render(request, 'pledge/congressman_list.html', {'congressmans': congressmans})
 
 def congressman_detail(request, pk):
