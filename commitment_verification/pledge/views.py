@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect, render, get_object_or_404
 from django.db.models import Q
 from pledge.models import *
@@ -12,12 +13,17 @@ def index(request):
 
 def congressman_list(request):
     # 국회의원 리스트
-    congressman_list = CongressMan.objects.all()
+    congressman_list = CongressMan.objects.all() # 국회의원 리스트
 
-    context = {}
-    context['congressman_list'] = congressman_list
-
-    return render(request, 'pledge/congressman_list.html', context)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(congressman_list, 12)
+    try:
+        congressmans = paginator.page(page)
+    except PageNotAnInteger:
+        congressmans = paginator.page(1)
+    except EmptyPage:
+        congressmans = paginator.page(paginator.num_pages)
+    return render(request, 'pledge/congressman_list.html', {'congressmans': congressmans})
 
 def congressman_detail(request, pk):
     # 국회의원 세부
