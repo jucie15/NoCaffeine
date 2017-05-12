@@ -12,8 +12,14 @@ class CongressManAdmin(admin.ModelAdmin):
         PledgeInline,
     ]
 
+class LikeOrDislikeInline(admin.TabularInline):
+    model = LikeOrDislike
+
 class PledgeAdmin(admin.ModelAdmin):
     model = Pledge
+    inlines = [
+        LikeOrDislikeInline,
+    ]
 
 class CommentAdmin(admin.ModelAdmin):
     model = Comment
@@ -24,9 +30,12 @@ class PledgeEventAdmin(admin.ModelAdmin):
 class PledgeEventPostAdmin(admin.ModelAdmin):
     model = PledgeEventPost
 
+class LikeOrDislikeAdmin(admin.ModelAdmin):
+    model = LikeOrDislike
 
 admin.site.register(CongressMan, CongressManAdmin)
 admin.site.register(Pledge, PledgeAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(PledgeEvent, PledgeEventAdmin)
 admin.site.register(PledgeEventPost, PledgeEventPostAdmin)
+admin.site.register(LikeOrDislike, LikeOrDislikeAdmin)
