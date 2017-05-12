@@ -1,18 +1,7 @@
 {% extends "pledge/layout.html" %}
 {% block content %}
 
-<!-- <div style="border:1px solid red;  width:500px;display:inline-block;">
-{% load staticfiles %}
-    <div class="congressman" style="float:left;">
-        <img src="{% static pledge.congressman.profile_image_path %}" class="img-rounded" alt="Cinque Terre" width="120" height="120" >
-    </div>
-    <div >
-        이름 : {{ pledge.congressman.name }} <br>
-        소속 : {{ pledge.congressman.party }} <br>
-        선거구 : {{ pledge.congressman.constituency }} <br>
-        이메일 : {{ pledge.congressman.email }}
-    </div>
-</div> -->
+
 <div class="container">
         <!-- ===========================
         HEADER
@@ -35,73 +24,58 @@
                     <h2>국회의원</h2>
                 </div><!-- Title end-->
 
-                <!-- ===========================
-                SOCIAL & CONTACT
-                ============================ -->
+
                 <div class="row">
                     <div class="col-sm-4">
                         <ul class="list-unstyled">
                             <li><a href=""><span class="social fa fa-home"></span>{{pledge.congressman.party}}</a>
                             </li>
-                            <li><a href=""><span class="social fa fa-facebook"></span>{{pledge.congressman.description}}</a>
-
-
                         </ul>
-                    </div><!-- social 1st col end-->
+                    </div><!-- 정당-->
 
                     <div class="col-sm-4">
                         <ul class="list-unstyled">
                             <li><a href=""><span class="social fa fa-skype"></span>{{pledge.congressman.constituency}}</a>
-
                             </li>
-                            <li><a href=""><span class="social fa fa-twitter"></span>Twitter</a>
-                            </li>
-                            <li><a href=""><span class="social fa fa-linkedin"></span>Linkedin</a>
-                            </li>
-                            <li>
-                             <input type="button" class="like" name="{{ pledge.pk }}" value="Like"> <!-- 좋아요 버튼 -->
-                             <p id="like_count{{ pledge.pk }}">count : {{ pledge.get_total_like }}</p> <!-- 좋아요 개수 표시 -->
-
-                             <input type="button" class="dislike" name="{{ pledge.pk }}" value="Dislike"> <!-- 싫어요 버튼 -->
-                             <p id="dislike_count{{ pledge.pk }}">count : {{ pledge.get_total_dislike }}</p> <!-- 싫어요 개수 표시 -->
-                            </li>
-
                         </ul>
-                    </div><!-- social 2nd col end-->
+                    </div><!-- 선거구-->
 
                     <div class="col-sm-4">
                         <ul class="list-unstyled">
                             <li><a href="mailto:support@evenfly.com"><span class="social fa fa-envelope-o"></span>{{pledge.congressman.email}}</a>
-                            <li><a href=""><span class="social fa fa-dribbble"></span>Dribbble</a>
-                            </li>
-                            <li><a href=""><span class="social fa fa-instagram"></span>Instagram</a>
-                            </li>
                         </ul>
-                    </div><!-- social 3rd col end-->
-                </div><!-- header social end-->
-            </div><!-- header right end-->
-        </div><!-- header end-->
+                    </div><!-- 이메일-->
+                    </hr>
+                    <div class="col-sm-12">
+                    <ul class="list-unstyled">
+                    <li><a href=""><span class="social fa fa-facebook"></span>{{pledge.congressman.description}}</a></li>
+                    </ul>
+                    </div><!-- 국회의원 설명 -->
+                </div>
+            </div><!-- 국회의원 정보 끝-->
+        </div><!-- 국회의원 사진 + 정보 끝-->
 
         <hr class="firsthr">
 
-<!-- <div>
-    공약 이름 : {{ pledge.title }}</br>
-    공약 상태 : {{ pledge.status }} </br>
-    공약 내용 : {{ pledge.description }} </br>
-    공약 날짜 : {{ pledge.created_at }} </br>
-</div> -->
 
-<div class="col-md-8 mainleft" style="background-color:#fff;">
+    <div class="col-md-8 mainleft" style="background-color:#fff;">
             <div id="statement" class="row mobmid">
                 <div class="col-sm-1">
                     <span class="secicon fa fa-user"></span>
                 </div><!--icon end-->
 
-                <div class="col-sm-11">
-                    <h3>공약상세내용</h3>
-                </div><!--info end-->
-            </div><!--personal statement end-->
-            <hr>
+                <div class="col-sm-11 ">
+                    <h3 class="col-sm-8">공약상세내용</h3>
+
+                    <div class="col-sm-2"">
+                     <input type="button" class="like btn btn-primary" name="{{ pledge.pk }}" value="Like"  > <!-- 좋아요 버튼 -->
+                     <p id="like_count{{ pledge.pk }}" >count : {{ pledge.get_total_like }}</p> <!-- 좋아요 개수 표시 -->
+
+                     <input type="button" class="dislike btn btn-danger" name="{{ pledge.pk }}" value="Dislike" > <!-- 싫어요 버튼 -->
+                     <p id="dislike_count{{ pledge.pk }}">count : {{ pledge.get_total_dislike }}</p> <!-- 싫어요 개수 표시 -->
+                    </div>
+                </div>
+
 
             <div id="education" class="row mobmid">
                 <div class="col-sm-1">
@@ -109,61 +83,45 @@
                 </div><!--icon end-->
 
                 <div class="col-sm-11">
-                    <h3>공약이름 : {{ pledge.title }}</h3>
-
+                    <h3>{{ pledge.title }}</h3>
+                    <h4> {{ pledge.description }}</h4>
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <h4>공약상태 : {{ pledge.status }}</h4>
-                            <p class="sub"><a href="">- 공약내용</a>
-                            </p>
-                            <p>{{ pledge.description }}</p>
                         </div>
 
-                        <div class="year col-md-3">
+                        <div class="year col-md-4">
                             <p>{{ pledge.created_at }}</p>
                         </div>
-                    </div><!--Education & Certification 1 end-->
+                    </div>
 
                     <hr>
 
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h4>BSc in Graphic Design</h4>
-                            <p class="sub"><a href="">Ideal Institute of Science and Technology</a>
-                            </p>
-                            <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration, Information Design, Packaging Design and Website Design</p>
-                        </div>
-
-                        <div class="year col-md-3">
-                            <p>2006-2009</p>
-                        </div>
-                    </div><!--Education & Certification 2 end-->
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h4>Diploma in Graphic Design</h4>
-                            <p class="sub"><a href="">Ideal Institute of Science and Technology</a>
-                            </p>
-                            <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration, Information Design, Packaging Design and Website Design</p>
-                        </div>
-
-                        <div class="year col-md-3">
-                            <p>2003-2006</p>
-                        </div>
-                    </div><!--Education & Certification 3 end-->
                 </div>
-            </div><!--Education & Certifications end-->
+            </div>
+    </div><!-- mainleft end-->
 
+         <form action="{% url "pledge:pledge_comment_new" pledge.pk %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.message }}
+        <input type="submit" class="btn btn-primary btn-block" value="댓글 쓰기" />
+        </form>
+            <ul>
+        {% for comment in pledge.comment_set.all %}
+            <li>
+                {{ comment.message }}
+                <small>by {{ comment.user }}</small>
 
+                {% if comment.user == user %}
+                    <a href="{% url "pledge:pledge_comment_edit" pledge.pk comment.pk %}">Edit</a>
+                    <a href="{% url "pledge:pledge_comment_delete" pledge.pk comment.pk %}" class="text-danger">Delete</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
 
-            <!-- ===========================
-            JOB EXPERIENCES
-            ============================ -->
+</div><!-- 어디에 매칭되는거지??-->
 
-        </div><!--left end-->
-            <!--  sidebar  -->
 
     <div class="col-md-4 mainright">
             <div class="row">
@@ -233,47 +191,11 @@
 
             <hr>
 
-            <div class="row ">
-                <div class="col-sm-1 col-md-2 mobmid">
-                    <span class="secicon fa fa-quote-left"></span>
-                </div><!--icon end-->
 
-                <div class="col-sm-11 col-md-10 testimonials">
-                    <h3 class="mobmid">Testimonials </h3>
-
-                    <div class="row">
-                        <blockquote>
-                            <p>Sit amet, consectetur adipisicing elit. Fuga quidem ipsum maiores necessitatibus sint, porro temporibus labore, amet officia unde libero eligendi? Porro dolorum itaque, facere harum amet, rem libero.</p>
-                        </blockquote>
-
-                    </div><!--1st testimonial end-->
-
-
-
-                </div><!--testimonials end-->
-            </div><!--tech skills end-->
-        </div><!--right end-->
+        </div><!--mainright end-->
     </div><!--container end-->
     <hr/>
 
-    <form action="{% url "pledge:pledge_comment_new" pledge.pk %}" method="post">
-        {% csrf_token %}
-        {{ comment_form.message }}
-        <input type="submit" class="btn btn-primary btn-block" value="댓글 쓰기" />
-    </form>
-        <ul>
-    {% for comment in pledge.comment_set.all %}
-        <li>
-            {{ comment.message }}
-            <small>by {{ comment.user }}</small>
-
-            {% if comment.user == user %}
-                <a href="{% url "pledge:pledge_comment_edit" pledge.pk comment.pk %}">Edit</a>
-                <a href="{% url "pledge:pledge_comment_delete" pledge.pk comment.pk %}" class="text-danger">Delete</a>
-            {% endif %}
-        </li>
-    {% endfor %}
-    </ul>
 
 
 <script type="text/javascript">
