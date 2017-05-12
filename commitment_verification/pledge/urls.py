@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'^(?P<pledge_pk>\d+)/pledge_like/$', views
         .pledge_like, name='pledge_like'),
     url(r'^(?P<pledge_pk>\d+)/pledge_dislike/$', views.pledge_dislike, name='pledge_dislike'),
+    url(r'^feedback', views.feedback_list, name='feedback_list'),
+    url(r'^feedback/(?P<pk>)/$', views.feedback_detail, name='feedback_detail'),
     url(r'^search/$', views.search, name='search'),
 ]

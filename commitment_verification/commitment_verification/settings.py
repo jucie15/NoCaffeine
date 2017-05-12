@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'pledge',
     'accounts',
     'el_pagination',
-
 ]
 
 

@@ -63,6 +63,12 @@ def pledge_detail(request, pledge_pk):
 
     return render(request, 'pledge/pledge_detail.html', context)
 
+def feedback_list(request):
+    return render(request,  'pledge/feedback_list.html')
+
+def feedback_detail(request):
+    pass
+
 def pledge_status_event(request):
     # 공약 상태 변경 이벤트
     pass
