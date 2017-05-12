@@ -23,8 +23,7 @@ class Pledge(models.Model):
     congressman = models.ForeignKey(CongressMan) # 국회의원 모델과 1toN 관계 설정
     title = models.CharField(max_length=32) # 공약 이름
     status = models.IntegerField(default=0) # 공약 상태
-    like = models.IntegerField(default=0) # 공약 좋아요
-    hate = models.IntegerField(default=0) # 공약 싫어요
+    like_dislike = models.ManyToManyField(settings.AUTH_USER_MODEL, through='LikeOrDislike') # 좋아요/싫어요 모델 LikeOrDisLike 모델을 통해 User와 N:M 관계 설정
     # event_status = models.BooleanField(default=False) # 공약 상태변경 이벤트 활성화 상태
     description = models.TextField(max_length=1024) # 공약에 대한 추가 설명
     created_at = models.DateTimeField(auto_now_add=True) # 공약 날짜
@@ -34,6 +33,27 @@ class Pledge(models.Model):
 
     def get_absolute_url(self):
         return reverse('pledge:pledge_detail', args = [self.pk])
+
+    @property
+    def get_total_like(self):
+        # 해당 공약의 좋아요 갯수 카운트 @property 장식자를 통해 템플릿에서 쉽게 접근하게 한다.
+        return LikeOrDislike.objects.filter(pledge_id=self.id, like=True).count()
+
+    @property
+    def get_total_dislike(self):
+        # 해당 공약의 싫어요 갯수 카운트 @property 장식자를 통해 템플릿에서 쉽게 접근하게 한다.
+        return LikeOrDislike.objects.filter(pledge_id=self.id, dislike=True).count()
+
+
+class LikeOrDislike(models.Model):
+    # 좋아요/싫어요를 위한 N:M 유저와 공약간의 관계모델
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='like_dislike') # 유저와 1:N 관계 설정
+    pledge = models.ForeignKey(Pledge) # 공약과 1:N 모델 설정
+    like = models.BooleanField(default=False) # 좋아요
+    dislike = models.BooleanField(default=False) # 싫어요
+
+    def __str__(self):
+        return '{}공약의 좋아요 {},싫어요 {}'.format(self.pledge, self.like, self.dislike)
 
 class Comment(models.Model):
     # 각 공약에 대한 댓글 모델
