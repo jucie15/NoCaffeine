@@ -138,6 +138,7 @@ def search(request):
 
     search_pledge_list = Pledge.objects.filter(condition) # 공약 검색 결과 리스트
 
+
     context = {}
     context['search_congressman_list'] = search_congressman_list
     context['search_pledge_list'] = search_pledge_list
