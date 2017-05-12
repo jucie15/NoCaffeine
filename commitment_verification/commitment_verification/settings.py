@@ -48,6 +48,7 @@ INSTALLED_APPS = [
         # local_apps
     'pledge',
     'accounts',
+    'el_pagination',
 
 ]
 
