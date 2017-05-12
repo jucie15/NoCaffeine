@@ -25,4 +25,4 @@ tests/report/
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
-db.sqlite3
+*.sqlite3
