@@ -70,7 +70,7 @@
                         </li>
                         <li><a href="{% url 'pledge:congressman_list' %}">국회의원 목록</a></li>
                         <li><a href="{% url 'pledge:pledge_list' %}">공약 목록</a></li>
-                        <li><a href="#pricing">피드백</a></li>
+                        <li><a href="{% url 'pledge:feedback_list' %}">피드백</a></li>
                         <li><a href="#our-team">후원</a></li>
                         {% if not user.is_authenticated %}
                             <li><a href="{% url 'accounts:login' %}?next={{ request.path }}">

@@ -20,9 +20,16 @@ class CongressMan(models.Model):
 
 class Pledge(models.Model):
     # 공약 모델
+    PLEDGE_STATUS_CHOICE = (
+        ('0', 'NOT_ENFORCEMENT'),
+        ('1', 'PROGRESS'),
+        ('2', 'COMPLETTION'),
+        ('3', 'FAILURE'),
+    ) # 공약 상태 ENUM 변수처럼 사용하기 위한 임시 변수
+
     congressman = models.ForeignKey(CongressMan) # 국회의원 모델과 1toN 관계 설정
     title = models.CharField(max_length=32) # 공약 이름
-    status = models.IntegerField(default=0) # 공약 상태
+    status = models.IntegerField(default=0, choices=PLEDGE_STATUS_CHOICE) # 공약 상태
     like_dislike = models.ManyToManyField(settings.AUTH_USER_MODEL, through='LikeOrDislike') # 좋아요/싫어요 모델 LikeOrDisLike 모델을 통해 User와 N:M 관계 설정
     # event_status = models.BooleanField(default=False) # 공약 상태변경 이벤트 활성화 상태
     description = models.TextField(max_length=1024) # 공약에 대한 추가 설명

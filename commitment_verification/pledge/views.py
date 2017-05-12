@@ -63,6 +63,12 @@ def pledge_detail(request, pledge_pk):
 
     return render(request, 'pledge/pledge_detail.html', context)
 
+def feedback_list(request):
+    return render(request,  'pledge/feedback_list.html')
+
+def feedback_detail(request):
+    pass
+
 def pledge_status_event(request):
     # 공약 상태 변경 이벤트
     pass
@@ -137,6 +143,7 @@ def pledge_comment_edit(request, pledge_pk, comment_pk):
         'form':form,
         })
 
+@login_required
 def pledge_like(request, pledge_pk):
     # 공약 좋아요 버튼 클릭시
     if request.is_ajax():
@@ -175,6 +182,7 @@ def pledge_like(request, pledge_pk):
     # dic 형식을 json 형식으로 바꾸어 전달한다.
     return HttpResponse(json.dumps(context), content_type='application/json')
 
+@login_required
 def pledge_dislike(request, pledge_pk):
     # 공약 싫어요 버튼 클릭 시
     if request.is_ajax():
