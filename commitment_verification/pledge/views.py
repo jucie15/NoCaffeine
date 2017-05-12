@@ -145,7 +145,8 @@ def pledge_like(request, pledge_pk):
         pledge = get_object_or_404(Pledge, pk=pledge_pk) # 해당 공약 인스턴스 생성
 
         if user.like_dislike.filter(pledge_id=pledge.id).exists():
-            # 좋아요/싫어요 중 하나라도 눌렀을 경우
+            # 좋아요/싫어요 중 하나라도 눌렀을 경우능
+            # 둘 중 한개만 선택 가능
             like_instance = user.like_dislike.get(pledge_id=pledge.id) # 좋아요/싫어요 인스턴스 생성
             if like_instance.like == True:
                 # 눌려있는 버튼이 좋아요일 경우
@@ -155,7 +156,6 @@ def pledge_like(request, pledge_pk):
                 like_instance.like = True
                 like_instance.dislike = False
                 like_instance.save()
-
         else:
             # 버튼이 하나도 안눌려있을 경우 새롭게 생성
             LikeOrDislike.objects.create(
@@ -184,6 +184,7 @@ def pledge_dislike(request, pledge_pk):
 
         if user.like_dislike.filter(pledge_id=pledge.id).exists():
             # 좋아요/싫어요 중 하나라도 눌렀을 경우
+            # 둘 중 한개만 선택 가능
             like_instance = user.like_dislike.get(pledge_id=pledge.id) # 좋아요/싫어요 인스턴스 생성
             if like_instance.dislike == True:
                 # 눌려있는 버튼이 싫어요일 경우
@@ -193,7 +194,6 @@ def pledge_dislike(request, pledge_pk):
                 like_instance.like = False
                 like_instance.dislike = True
                 like_instance.save()
-
         else:
             # 버튼이 하나도 안눌려있을 경우 새롭게 생성
             LikeOrDislike.objects.create(
@@ -227,14 +227,13 @@ def search(request):
     condition = (Q(congressman__name__icontains=keyword) |
     Q(congressman__description__icontains=keyword) |
     Q(congressman__party__icontains=keyword) |
-    Q(congressman__constituency__icontains=keyword)) # 공약 검색 조건(검색된 국회의원들의 공약을 검색)
+    Q(congressman__constituency__icontains=keyword) |
+    Q(title__icontains=keyword) |
+    Q(status__icontains=keyword) |
+    Q(description__icontains=keyword)) # 공약 검색 조건(검색된 국회의원들의 공약을 검색)
 
     # 공약 검색 결과
     search_pledge_list = Pledge.objects.filter(condition) # 공역 검색 결과 리스트
-
-    # condition = Q(title__icontains=keyword) | Q(status__icontains=keyword) | Q(description__icontains=keyword) # 검색 조건
-
-    # search_pledge_list = Pledge.objects.filter(condition) # 공약 검색 결과 리스트
 
     context = {}
     context['search_congressman_list'] = search_congressman_list

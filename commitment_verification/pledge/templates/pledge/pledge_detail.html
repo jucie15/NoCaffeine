@@ -59,11 +59,11 @@
                             <li><a href=""><span class="social fa fa-linkedin"></span>Linkedin</a>
                             </li>
                             <li>
-                             <input type="button" class="like" name="{{ pledge.pk }}" value="Like">
-                             <p id="like_count{{ pledge.pk }}">count : {{ pledge.get_total_like }}</p>
+                             <input type="button" class="like" name="{{ pledge.pk }}" value="Like"> <!-- 좋아요 버튼 -->
+                             <p id="like_count{{ pledge.pk }}">count : {{ pledge.get_total_like }}</p> <!-- 좋아요 개수 표시 -->
 
-                             <input type="button" class="dislike" name="{{ pledge.pk }}" value="Dislike">
-                             <p id="dislike_count{{ pledge.pk }}">count : {{ pledge.get_total_dislike }}</p>
+                             <input type="button" class="dislike" name="{{ pledge.pk }}" value="Dislike"> <!-- 싫어요 버튼 -->
+                             <p id="dislike_count{{ pledge.pk }}">count : {{ pledge.get_total_dislike }}</p> <!-- 싫어요 개수 표시 -->
                             </li>
 
                         </ul>
