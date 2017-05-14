@@ -20,6 +20,7 @@ from pledge import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('pledge.urls', namespace='pledge')),
+    url(r'^feedback/', include('feedback.urls', namespace='feedback')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^accounts/', include('allauth.urls')),
 ]

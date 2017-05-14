@@ -62,9 +62,9 @@ class LikeOrDislike(models.Model):
     def __str__(self):
         return '{}공약의 좋아요 {},싫어요 {}'.format(self.pledge, self.like, self.dislike)
 
-class Comment(models.Model):
+class PledgeComment(models.Model):
     # 각 공약에 대한 댓글 모델
-    pledge = models.ForeignKey(Pledge) # 해당 공약과 1:N 관계 설정
+    pledge = models.ForeignKey(Pledge, related_name='pledge_comment_set') # 해당 공약과 1:N 관계 설정
     user = models.ForeignKey(settings.AUTH_USER_MODEL) # 해당 댓글을 쓴 유저와 1:N 관계 설정
     message = models.TextField() # 댓글 내용
 

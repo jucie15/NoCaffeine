@@ -1,0 +1,44 @@
+{% extends 'pledge/layout.html' %}
+{% block content %}
+<div class='container'>
+    <table class='table table-striped' style='margin-top: 50px;'>
+        <thead>
+            <!-- 테이블의 타이틀 -->
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+            <th>조회수</th>
+        </thead>
+        <tbody>
+            {% load el_pagination_tags %}
+            {% paginate 10 post_list %} <!-- 한페이지에 10개씩 표현 -->
+                {% for post in post_list %}
+                    <tr onclick="location.href='{{ post.get_absolute_url }}'" style="cursor:pointer;">
+                        <!-- 테이블 한 행 자체에 링크 걸기 -->
+                        <td>{{ post.pk }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.author }}</td>
+                        <td>{{ post.updated_at }}</td>
+                        <td> 조회수 </td>
+                    </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+
+    <hr/>
+
+    <a href="{% url 'feedback:post_new' %}" class='btn btn-default pull-right'>글쓰기</a>
+
+    {% get_pages %}
+    <div class='text-center' style='font-size: 11pt'>
+        <ul class='pagination'>
+            {% if pages.paginated %}
+                <li>
+                    {{ pages }}
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

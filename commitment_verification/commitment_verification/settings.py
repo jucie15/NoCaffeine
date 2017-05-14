@@ -45,10 +45,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.kakao',
     'allauth.socialaccount.providers.naver',
+    'el_pagination',
+
         # local_apps
     'pledge',
     'accounts',
-    'el_pagination',
+    'feedback',
 ]
 
 
@@ -129,7 +131,7 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 

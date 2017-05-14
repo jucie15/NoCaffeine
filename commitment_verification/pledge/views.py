@@ -63,12 +63,6 @@ def pledge_detail(request, pledge_pk):
 
     return render(request, 'pledge/pledge_detail.html', context)
 
-def feedback_list(request):
-    return render(request,  'pledge/feedback_list.html')
-
-def feedback_detail(request):
-    pass
-
 def pledge_status_event(request):
     # 공약 상태 변경 이벤트
     pass
@@ -106,7 +100,7 @@ def pledge_comment_new(request, pledge_pk):
 @login_required
 def pledge_comment_delete(request, pledge_pk, comment_pk):
     # 공약 디테일 내 댓글 지우기
-    comment = get_object_or_404(Comment, pk=comment_pk)
+    comment = get_object_or_404(PledgeComment, pk=comment_pk)
 
     if comment.user != request.user:
         # 댓글 작성자와 현재 유저가 다를 경우
@@ -121,7 +115,7 @@ def pledge_comment_delete(request, pledge_pk, comment_pk):
 @login_required
 def pledge_comment_edit(request, pledge_pk, comment_pk):
     # 공약 디테일 내 댓글 수정
-    comment = get_object_or_404(Comment, pk=comment_pk)
+    comment = get_object_or_404(PledgeComment, pk=comment_pk)
 
     if comment.user != request.user:
         # 댓글 작성자와 현재 유저가 다를 경우 해당 공약페이지로 리다이렉트

@@ -8,14 +8,14 @@
 {% load el_pagination_tags %}
     <div class="congressman-list-row" style="margin:0 auto;">
         {% paginate 9 search_congressman_list %}
-        <!-- 한 페이지에 몇개의 오브젝트씩 표현할 것인가 -->
+        <!-- 한 페이지에 9개씩 표현 -->
         {% for congressman in search_congressman_list %}
 
             {% load staticfiles %}
             <a href="{% url 'pledge:congressman_detail' congressman.id %}" style="color:#000;">
                 <div class="col-xs-6 col-sm-4" id="wood-bar">
                     <div class="congressman-profile-image" style="float:left; margin-right:10px;margin-top:20px; ">
-                        <img src="{% static congressman.profile_image_path %}" class="img-rounded" alt="Cinque Terre" width="120" height="120">
+                        <img src="{% static congressman.profile_image_path %}" class="img-rounded" alt="Congressman" width="120" height="120">
                     </div>
                     <div class="congressman-profile" style="margin-top:20px;">
                         이름 : {{ congressman.name }} <br>
@@ -27,9 +27,15 @@
             </a>
         {% endfor %}
         {% get_pages %}
-        {% if pages.paginated %}
-            {{ pages }}
-        {% endif %}
+        <div class='text-center' style='font-size: 12pt'>
+            <ul class='pagination'>
+                {% if pages.paginated %}
+                    <li>
+                        {{ pages }}
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div><!-- .congressman_list_row -->
 </div>
 <!-- <hr style="size:10px;"/> -->
@@ -64,9 +70,15 @@
 
             {% endfor%}
             {% get_pages %}
-            {% if pages.paginated %}
-                {{ pages }}
-            {% endif %}
+            <div class='text-center' style='font-size: 12pt'>
+                <ul class='pagination'>
+                    {% if pages.paginated %}
+                        <li>
+                            {{ pages }}
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </table>
     </table>
 </div>

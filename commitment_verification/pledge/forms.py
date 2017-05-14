@@ -1,10 +1,10 @@
 from django import forms
-from pledge.models import Comment
+from pledge.models import PledgeComment
 
 
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comment
+        model = PledgeComment
         # fields = '__all__'
         fields = ['message']
         widgets = {
