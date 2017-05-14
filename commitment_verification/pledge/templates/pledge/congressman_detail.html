@@ -1,42 +1,7 @@
 {% extends "pledge/layout.html" %}
-<html lang="">
-
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ===========================
-    THEME INFO
-    =========================== -->
-    <meta name="description" content="CVstrap is another Free minimal CV HTML theme by EvenFly built with Bootstrap 3.3.0. and released under CC-3.0 license.">
-    <meta name="keywords" content="curriculum vitae, cv, one page, onepage, bootstrap, responsive, resume, timeline, free cv">
-    <meta name="author" content="Mamun Srizon">
-
-     <link rel="icon" href="img/favicon.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-ipad-retina.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-iphone-retina.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-ipad.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-iphone.png" />
-
-    <!-- ===========================
-    STYLESHEETS
-    =========================== -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-
-    <!-- ===========================
-    FONTS & ICONS
-    =========================== -->
-    <link href='http://fonts.googleapis.com/css?family=Kristi|Alegreya+Sans:300' rel='stylesheet' type='text/css'>
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-
 {% block content %}
 
-
-         <div class="container">
+<div class="container">
         <!-- ===========================
         HEADER
         ============================ -->
@@ -59,7 +24,7 @@
                 </div><!-- Title end-->
 
                 <!-- ===========================
-                SOCIAL & CONTACT
+                국회의원 정보
                 ============================ -->
                 <div class="row">
                     <div class="col-sm-4">
@@ -67,29 +32,29 @@
                             <li><a href=""><span class="social fa fa-home"></span>{{congressman.party}}</a>
                             </li>
                         </ul>
-                    </div><!-- social 1st col end-->
+                    </div><!-- 정당 -->
 
                     <div class="col-sm-4">
                         <ul class="list-unstyled">
                             <li><a href=""><span class="social fa fa-cloud"></span>{{congressman.constituency}}</a>
                             </li>
                         </ul>
-                    </div><!-- social 2nd col end-->
+                    </div><!-- 선거구 -->
 
                     <div class="col-sm-4">
                         <ul class="list-unstyled">
-                            <li><a href="mailto:support@evenfly.com"><span class="social fa fa-envelope-o"></span>{{congressman.email}}</a>
+                            <li><a href="mailto:support@evenfly.com"><span class="social fa fa-envelope-o"></span>{{congressman.email}}</a></li>
                         </ul>
-                    </div><!-- social 3rd col end-->
+                    </div><!-- 이메일 -->
                     </hr>
                     <div class="col-sm-12">
                     <ul class="list-unstyled">
                     <li><a href=""><span class="social fa fa-facebook"></span>{{congressman.description}}</a></li>
                     </ul>
-                    </div>
-                </div><!-- header social end-->
-            </div><!-- header right end-->
-        </div><!-- header end-->
+                    </div><!-- 설명 -->
+                </div><!-- 국회의원 정보 end-->
+            </div>
+        </div><!-- 사진+정보 end -->
 
         <hr class="firsthr">
 
@@ -108,7 +73,7 @@
                             <td><strong>공약 제목</strong></td>
                             <td><strong>공약 설명</strong></td>
                             <td><strong>진행 상태</strong></td>
-                        </tr>
+                        </tr><!-- 첫번째 행 -->
 
 
                         {% for pledge in congressman.pledge_set.all %}
@@ -116,25 +81,18 @@
                             <td>{{pledge.pk}}</td>
                             <td><a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge.title }}</a></td>
                             <td>{{pledge.description|truncatechars:10}}</td>
-                            <td>
-                            {{pledge.status}}</td>
-                        </tr>
+                            <td>{{pledge.status}}</td>
+                        </tr><!-- 두번째 행 -->
 
                     {% endfor%}
-                        </table>
-                        </table>
-                        </div>
-
-
-
-
-            </div><!--personal statement end-->
-
-            <hr>
+                    </table>
+                </table>
+            </div>
+        </div><!--pledge end-->
 
 
         <!-- ===========================
-        SIDEBAR
+        BODY RIGHT PART
         =========================== -->
         <div class="col-md-4 mainright">
             <div class="row">
@@ -204,34 +162,7 @@
 
             <hr>
 
-            <div class="row ">
-                <div class="col-sm-1 col-md-2 mobmid">
-                    <span class="secicon fa fa-quote-left"></span>
-                </div><!--icon end-->
-
-                <div class="col-sm-11 col-md-10 testimonials">
-                    <h3 class="mobmid">Testimonials </h3>
-
-                    <div class="row">
-                        <blockquote>
-                            <p>Sit amet, consectetur adipisicing elit. Fuga quidem ipsum maiores necessitatibus sint, porro temporibus labore, amet officia unde libero eligendi? Porro dolorum itaque, facere harum amet, rem libero.</p>
-                        </blockquote>
-
-                    </div><!--1st testimonial end-->
-
-
-
-                </div><!--testimonials end-->
-            </div><!--tech skills end-->
         </div><!--right end-->
-    </div><!--container end-->
-
-
-
-    <!--necessary scripts and plugins-->
-   <!--  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="{% static 'pledge/js/jquery.nicescroll.min.js' %}"></script>
-    <script src="{% static 'pledge/js/evenfly.js' %}" "></script> -->
+</div>
 
 {% endblock %}
