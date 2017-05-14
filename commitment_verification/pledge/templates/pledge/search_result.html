@@ -7,7 +7,8 @@
 <h2>국회의원 검색 결과</h2>
 {% load el_pagination_tags %}
     <div class="congressman-list-row" style="margin:0 auto;">
-        {% paginate search_congressman_list %}
+        {% paginate 9 search_congressman_list %}
+        <!-- 한 페이지에 몇개의 오브젝트씩 표현할 것인가 -->
         {% for congressman in search_congressman_list %}
 
             {% load staticfiles %}
@@ -25,41 +26,48 @@
                 </div>
             </a>
         {% endfor %}
-        <h2>{% show_pages %}</h2>
+        {% get_pages %}
+        {% if pages.paginated %}
+            {{ pages }}
+        {% endif %}
     </div><!-- .congressman_list_row -->
 </div>
 <!-- <hr style="size:10px;"/> -->
 </div>
+
 <div class='container'>
 <h2>공약 검색 결과</h2>
 {% load el_pagination_tags %}
 
-<table class="table-responsive">
-                    <table class="table">
-                        <tr class="success">
-                            <td><strong>공약 번호</strong></td>
-                            <!-- 국회의원별로 공약이 안 나눠져 있어 번호혼동됨 -->
-                            <td><strong>공약 제목</strong></td>
-                            <td><strong>공약 설명</strong></td>
-                            <td><strong>진행 상태</strong></td>
-                            <td><strong>국회 의원</strong></td>
-                        </tr>
+    <table class="table-responsive">
+        <table class="table">
+            <tr class="success">
+                <td><strong>공약 번호</strong></td>
+                <!-- 국회의원별로 공약이 안 나눠져 있어 번호혼동됨 -->
+                <td><strong>공약 제목</strong></td>
+                <td><strong>공약 설명</strong></td>
+                <td><strong>진행 상태</strong></td>
+                <td><strong>국회 의원</strong></td>
+            </tr>
 
-                        {% paginate search_pledge_list %}
-                        {% for pledge in search_pledge_list %}
-                        <tr>
-                            <td>{{pledge.pk}}</td>
-                            <td><a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge.title }}</a></td>
-                            <td>{{pledge.description|truncatechars:10}}</td>
-                            <td>
-                            {{pledge.status}}</td>
-                            <td>
-                            {{pledge.congressman}}</td>
-                        </tr>
+            {% paginate search_pledge_list %}
+            {% for pledge in search_pledge_list %}
+            <tr>
+                <td>{{pledge.pk}}</td>
+                <td><a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge.title }}</a></td>
+                <td>{{pledge.description|truncatechars:10}}</td>
+                <td>
+                {{pledge.status}}</td>
+                <td>
+                {{pledge.congressman}}</td>
+            </tr>
 
-                        {% endfor%}
-                        <h2>{% show_pages %}</h2>
-                        </table>
-                        </table>
+            {% endfor%}
+            {% get_pages %}
+            {% if pages.paginated %}
+                {{ pages }}
+            {% endif %}
+        </table>
+    </table>
 </div>
 {% endblock %}
