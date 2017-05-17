@@ -46,11 +46,29 @@ def post_new(request):
         'form': form,
     })
 
+@login_required
+def post_delete(request, post_pk):
+    # 피드백 게시판 글 삭제
+    post = get_object_or_404(FeedbackPost, pk=post_pk) # 해당 게시글의 인스턴스 생성
+
+    if post.author != request.user:
+        # 게시글의 작성자와 현재 유저가 다를 경우
+        messages.warning(request, '게시글 작성자만 삭제할 수 있습니다.')
+        redirect(post)
+    else:
+        # 현재 유저와 작성자가 같으면 게시글 삭제
+        post.delete()
+        return redirect('feedback:post_list')
 
 @login_required
 def post_edit(request, post_pk):
     # 피드백 게시판 글 수정
     post = get_object_or_404(FeedbackPost, pk=post_pk) # 해당 게시글의 인스턴스 생성
+
+    if  post.author != request.user:
+        # 게시글 작성자와 현재 유저가 다를 경우 해당 게시글 페이지로 리다이렉트
+        messages.warning(request, '게시글 작성자만 수정할 수 있습니다.')
+        return redirect(post)
 
     if request.method == 'POST':
         # 포스트 요청일 경우
@@ -117,7 +135,7 @@ def comment_edit(request, post_pk, comment_pk):
     if comment.user != request.user:
         # 댓글 작성자와 현재 유저가 다를 경우 해당 피드백페이지로 리다이렉트
         messages.warning(request, '댓글 작성자만 수정할 수 있습니다.')
-        return reditrect(comment.post)
+        return redirect(comment.post)
 
     if request.method == 'POST':
         # 포스트 요청일 경우
