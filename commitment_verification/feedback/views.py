@@ -17,6 +17,8 @@ def post_detail(request, post_pk):
     post = get_object_or_404(FeedbackPost, pk=post_pk)
     comment_form = CommentForm()
 
+    post.hit_count() # 조회수 증가
+
     return render(request, 'feedback/post_detail.html', {
         'post': post,
         'comment_form': comment_form,

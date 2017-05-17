@@ -6,11 +6,12 @@ from django.shortcuts import reverse
 
 class FeedbackPost(models.Model):
     # 피드백 게시판 POST 모델
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='pledge_post_set') # 글쓴이
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='feedback_post_set') # 글쓴이
     title = models.CharField(max_length=128,
         validators=[MinLengthValidator(5)],
         verbose_name='제목') # 제목
     content = models.TextField(verbose_name='내용') # 내용
+    hits = models.IntegerField(default=0) # 조회수
     created_at = models.DateTimeField(auto_now_add=True) # 게시일
     updated_at = models.DateTimeField(auto_now=True) # 수정
 
@@ -23,6 +24,11 @@ class FeedbackPost(models.Model):
 
     def get_absolute_url(self):
         return reverse('feedback:post_detail', args = [self.pk])
+
+    def hit_count(self):
+        # 조회수 증가 함수
+        self.hits += 1
+        self.save()
 
 class FeedbackComment(models.Model):
     # 각 피드백 글에 대한 댓글 모델
