@@ -1,0 +1,36 @@
+{% extends "pledge/layout.html" %}
+
+{% block content %}
+    <h2>{{ post.title }}</h2>
+
+    {{ post.content }}
+
+    <hr/>
+    <a href="{% url "feedback:post_list" %}" class="btn btn-default">목록</a>
+    {% if post.author == user %}
+        <!-- 글 작성자와 현재 유저가 같을 경우에만 수정,삭제 버튼 표시-->
+        <a href="{% url "feedback:post_edit" post.pk %}" class="btn btn-primary">수정</a>
+        <a href="{% url "feedback:post_delete" post.pk %}" class="btn btn-danger">삭제</a>
+    {% endif %}
+    <form action="{% url "feedback:comment_new" post.pk %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.message }}
+        <input type="submit" class="btn btn-primary btn-block" value="댓글 쓰기" />
+    </form>
+
+    <h3>Comments</h3>
+
+    <ul>
+        {% for comment in post.feedback_comment_set.all %}
+            <li>
+                {{ comment.message }}
+                <small>by {{ comment.user }}</small>
+
+                {% if comment.user == user %}
+                    <a href="{% url "feedback:comment_edit" post.pk comment.pk %}">Edit</a>
+                    <a href="{% url "feedback:comment_delete" post.pk comment.pk %}" class="text-danger">Delete</a>
+                {% endif %}
+            </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

@@ -45,10 +45,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.kakao',
     'allauth.socialaccount.providers.naver',
+    'el_pagination',
+
         # local_apps
     'pledge',
     'accounts',
-    'el_pagination',
+    'feedback',
 ]
 
 
@@ -129,7 +131,7 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -145,3 +147,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+# El_pagination settings
+EL_PAGINATION_DEFAULT_CALLABLE_EXTREMES = 0 # 맨 첫페이지와 맨 끝페이지에서부터 몇개씩 표시할지
+EL_PAGINATION_DEFAULT_CALLABLE_AROUNDS = 3 # 현재 페이지 앞 뒤로 몇개 표시할지
+EL_PAGINATION_DEFAULT_CALLABLE_ARROWS = True # 맨 앞, 맨 뒤로 가기

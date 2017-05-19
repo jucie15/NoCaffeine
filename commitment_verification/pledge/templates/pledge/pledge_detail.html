@@ -107,7 +107,7 @@
         <input type="submit" class="btn btn-primary btn-block" value="댓글 쓰기" />
         </form>
             <ul>
-        {% for comment in pledge.comment_set.all %}
+        {% for comment in pledge.pledge_comment_set.all %}
             <li>
                 {{ comment.message }}
                 <small>by {{ comment.user }}</small>
