@@ -90,11 +90,10 @@ BODY RIGHT PART
             <br/>
 
             {% ifequal pledge.status "0" %}
-            <div class="alert alert-success" style="text-align:center">
-                <strong>시행완료</strong>
+            <div class="alert alert-danger" style="text-align:center">
+                <strong>미시행</strong>
             </div>
             {% endifequal %}
-
 
             {% ifequal pledge.status "1" %}
             <div class="alert alert-info" style="text-align:center">
@@ -103,15 +102,15 @@ BODY RIGHT PART
             {% endifequal %}
 
             {% ifequal pledge.status "2" %}
-            <p>실패</p>
-            <div class="alert alert-warning" style="text-align:center">
-                <strong>실패</strong>
+            <div class="alert alert-success" style="text-align:center">
+                <strong>시행완료</strong>
             </div>
             {% endifequal %}
 
             {% ifequal pledge.status "3" %}
-            <div class="alert alert-danger" style="text-align:center">
-                <strong>미시행</strong>
+            <p>실패</p>
+            <div class="alert alert-warning" style="text-align:center">
+                <strong시행실패</strong>
             </div>
             {% endifequal %}
 
