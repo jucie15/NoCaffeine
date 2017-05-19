@@ -26,3 +26,7 @@ tests/report/
 .idea/vcs.xml
 .idea/workspace.xml
 *.sqlite3
+.idea/dictionaries/spark.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
+commitment_verification/pledge/migrations/0013_auto_20170519_2119.py
