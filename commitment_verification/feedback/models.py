@@ -13,7 +13,7 @@ class FeedbackPost(models.Model):
     content = models.TextField(verbose_name='내용') # 내용
     hits = models.IntegerField(default=0) # 조회수
     created_at = models.DateTimeField(auto_now_add=True) # 게시일
-    updated_at = models.DateTimeField(auto_now=True) # 수정
+    updated_at = models.DateTimeField(auto_now=True) # 수정일
 
 
     class Meta:

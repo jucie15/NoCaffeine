@@ -52,7 +52,7 @@
 		background-color: #fff;
 	}
 
-	a { 
+	a {
 		color: #000;
 		-webkit-transition: all 0.2s ease-in-out;
 		-moz-transition: all 0.2s ease-in-out;
@@ -175,7 +175,7 @@
 
 	.btn-readmore:hover{
 		background-color: #000;
-		color: #fff;	
+		color: #fff;
 	}
 
 
@@ -263,7 +263,7 @@
 		text-align: left;
 		color: #fff;
 		text-shadow: none;
-		margin-top: -130px;	
+		margin-top: -130px;
 	}
 
 	.carousel-caption h1 {
@@ -283,8 +283,8 @@
 		margin-bottom:20px;
 	}
 
-	.home-carousel-left, 
-	.home-carousel-right {	
+	.home-carousel-left,
+	.home-carousel-right {
 		background-color: #f0f0f0;
 		color:#000;
 		font-size: 32px;
@@ -320,8 +320,8 @@
 	}
 	/* Carousel animation */
 
-	#home-carousel .item h1, 
-	#home-carousel .item h2, 
+	#home-carousel .item h1,
+	#home-carousel .item h2,
 	#home-carousel .item p {
 		opacity:0;
 		-moz-transform: scale(0.5);
@@ -339,8 +339,8 @@
 		transition: all 0.5s ease-in-out 0.15s;
 	}
 
-	#home-carousel .item.active h1, 
-	#home-carousel .item.active h2, 
+	#home-carousel .item.active h1,
+	#home-carousel .item.active h2,
 	#home-carousel .item.active p {
 		opacity:1;
 		-moz-transform: scale(1);
@@ -508,7 +508,7 @@
 
 
 /* 8. PRICING */
-	
+
 	#pricing{
 		background-color: #f5f5f5;
 		padding-top: 130px;
@@ -564,7 +564,7 @@
 
 
 /* 9. ABOUT US */
-	
+
 	#about-us{
 		background-color: #f5f5f5;
 	}
@@ -588,8 +588,8 @@
 		padding-right: 0px;
 	}
 
-	.office-carousel-left, 
-	.office-carousel-right {	
+	.office-carousel-left,
+	.office-carousel-right {
 		background-color: #f0f0f0;
 		color:#000;
 		font-size: 32px;
@@ -740,7 +740,7 @@
 
 
 /* 12. FUN FACTS */
-	
+
 	#fun-facts{
 		background-color: #f5f5f5;
 		padding-top: 40px;
@@ -771,7 +771,7 @@
 		padding-top: 130px;
 		padding-bottom: 120px;
 	}
-	
+
 	.contact-info .contact-content{
 		margin-bottom: 30px;
 	}
@@ -805,7 +805,7 @@
 
 
 /* 14. BLOG */
-	
+
 	#page-header{
 		background-color: #f5f5f5;
 		padding-top: 50px;
@@ -840,8 +840,8 @@
 		opacity: 1;
 	}
 
-	.post-carousel-left, 
-	.post-carousel-right {	
+	.post-carousel-left,
+	.post-carousel-right {
 		background-color: #f0f0f0;
 		color:#000;
 		font-size: 32px;
@@ -1042,7 +1042,7 @@
 		margin-right: 10px;
 	}
 
-	
+
 /* 16. SCROLL TO TOP */
 
 	.scroll-up {

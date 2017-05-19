@@ -5,36 +5,44 @@
 <div class="container" style="margin-top: 20px;">
 {% load el_pagination_tags %}
 <span class="secicon fa fa-user"><strong style="font-size: 25px;">공약 목록</strong></span>
+    <table class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <th>공약 번호</th>
+                <!-- 국회의원별로 공약이 안 나눠져 있어 번호혼동됨 -->
+                <th>공약 제목</th>
+                <th>공약 설명</th>
+                <th>진행 상태</th>
+                <th>국회 의원</th>
+            </thead>
+            {% paginate 10 pledge_list %}
+            {% for pledge in pledge_list %}
+            <tr>
+                <td>{{pledge.pk}}</td>
+                <td><a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge.title }}</a></td>
+                <td>{{pledge.description|truncatechars:10}}</td>
+                <td>
+                {{ pledge.get_status_display }}</td>
+                <td>
+                {{ pledge.congressman }}</td>
+            </tr>
 
+            {% endfor%}
+        </table>
+    </table>
 
-                <table class="table-responsive">
-                    <table class="table">
-                        <tr class="success">
-                            <td><strong>공약 번호</strong></td>
-                            <!-- 국회의원별로 공약이 안 나눠져 있어 번호혼동됨 -->
-                            <td><strong>공약 제목</strong></td>
-                            <td><strong>공약 설명</strong></td>
-                            <td><strong>진행 상태</strong></td>
-                            <td><strong>국회 의원</strong></td>
-                        </tr>
+    {% get_pages %}
 
-                        {% paginate pledge_list %}
-                        {% for pledge in pledge_list %}
-                        <tr>
-                            <td>{{pledge.pk}}</td>
-                            <td><a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge.title }}</a></td>
-                            <td>{{pledge.description|truncatechars:10}}</td>
-                            <td>
-                            {{pledge.status}}</td>
-                            <td>
-                            {{pledge.congressman}}</td>
-                        </tr>
+    <div class='text-center' style='font-size: 11pt'>
+        <ul class='pagination'>
+            {% if pages.paginated %}
+                <li>
+                    {{ pages }}
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 
-                        {% endfor%}
-                        </table>
-                        </table>
-
-                        {% show_pages %}
 </div>
 
 {% endblock %}

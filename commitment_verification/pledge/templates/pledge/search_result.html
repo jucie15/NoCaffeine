@@ -56,7 +56,7 @@
                 <td><strong>국회 의원</strong></td>
             </tr>
 
-            {% paginate search_pledge_list %}
+            {% paginate 1 search_pledge_list %}
             {% for pledge in search_pledge_list %}
             <tr>
                 <td>{{pledge.pk}}</td>
