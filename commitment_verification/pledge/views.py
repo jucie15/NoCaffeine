@@ -17,28 +17,34 @@ def congressman_list(request):
     # 국회의원 리스트
     congressman_list = CongressMan.objects.all() # 국회의원 리스트
 
-    page = request.GET.get('page', 1) # 페이지 번호를 받아온다.
-    paginator = Paginator(congressman_list, 15) # 페이지 당 15개씩 표현
+    context = {}
+    context['congressman_list'] = congressman_list
 
-    try:
-        # 페이지 번호가 있으면 해당 페이지로 이동
-        congressmans = paginator.page(page)
-    except PageNotAnInteger:
-        # 페이지 번호가 숫자가 아닐 경우 첫페이지로 이동
-        congressmans = paginator.page(1)
-    except EmptyPage:
-        # 페이지가 비어있을 경우 paginator.num_page = 총 페이지 개수
-        # paginator.num_page = 국회의원 총 수(300) / 페이지 나눔 개수(15
-        congressmans = paginator.page(paginator.num_pages)
-
-    return render(request, 'pledge/congressman_list.html', {'congressmans': congressmans})
+    return render(request,
+        'pledge/congressman_list.html',
+        context
+        )
 
 def congressman_detail(request, cm_pk):
     # 국회의원 세부
     congressman = get_object_or_404(CongressMan, pk=cm_pk)
 
+    pledge_status = {}
+
+    try:
+        pledge_status['not_enforcement'] = congressman.pledge_set.filter(status='0').count() / congressman.pledge_set.all().count() * 100
+        pledge_status['progress'] = congressman.pledge_set.filter(status='1').count() / congressman.pledge_set.all().count() * 100
+        pledge_status['complete'] = congressman.pledge_set.filter(status='2').count() / congressman.pledge_set.all().count() * 100
+        pledge_status['falied'] = congressman.pledge_set.filter(status='3').count() / congressman.pledge_set.all().count() * 100
+    except ZeroDivisionError:
+        pledge_status['not_enforcement'] = 100
+        pledge_status['progress'] = 0
+        pledge_status['complete'] =0
+        pledge_status['falied'] = 0
+
     context = {}
     context['congressman'] = congressman
+    context['pledge_status'] = pledge_status
 
     return render(request, 'pledge/congressman_detail.html', context)
 
