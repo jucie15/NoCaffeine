@@ -1,17 +1,21 @@
 {% extends "pledge/layout1.html" %}
 
 {% block content %}
+<div class='container'>
     <h2>{{ post.title }}</h2>
 
     {{ post.content }}
 
     <hr/>
-    <a href="{% url "feedback:post_list" %}" class="btn btn-default">목록</a>
-    {% if post.author == user %}
-        <!-- 글 작성자와 현재 유저가 같을 경우에만 수정,삭제 버튼 표시-->
-        <a href="{% url "feedback:post_edit" post.pk %}" class="btn btn-primary">수정</a>
-        <a href="{% url "feedback:post_delete" post.pk %}" class="btn btn-danger">삭제</a>
-    {% endif %}
+    <div class='pull-right'>
+    <!-- 버튼 오른쪽 정렬-->
+        <a href="{% url "feedback:post_list" %}" class="btn btn-default">목록</a>
+        {% if post.author == user %}
+            <!-- 글 작성자와 현재 유저가 같을 경우에만 수정,삭제 버튼 표시-->
+            <a href="{% url "feedback:post_edit" post.pk %}" class="btn btn-primary">수정</a>
+            <a href="{% url "feedback:post_delete" post.pk %}" class="btn btn-danger">삭제</a>
+        {% endif %}
+    </div><!--.pull-right-->
     <form action="{% url "feedback:comment_new" post.pk %}" method="post">
         {% csrf_token %}
         {{ comment_form.message }}
@@ -33,4 +37,5 @@
             </li>
     {% endfor %}
     </ul>
+</div><!--.container-->
 {% endblock %}
