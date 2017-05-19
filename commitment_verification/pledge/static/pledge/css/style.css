@@ -50,6 +50,7 @@
 		letter-spacing: 0.075em;
 		color: #333333;
 		background-color: #fff;
+		margin:0;
 	}
 
 	a {
@@ -1016,15 +1017,21 @@
 /* 15. FOOTER */
 
 	#footer{
+		position:absolute;
+
+		left:0;
+		right:0;
 		background-color: #262626;
 		padding-top: 40px;
 		padding-bottom: 40px;
 		color: rgba(255, 255, 255, 0.4);
 	}
-
+	#footer1 a,
 	#footer a{
 		color: rgba(255, 255, 255, 0.4);
 	}
+
+	#footer1 a:hover,
 	#footer a:hover{
 		color: #fff;
 	}
@@ -1042,6 +1049,16 @@
 		margin-right: 10px;
 	}
 
+	#footer1{
+		position:absolute;
+		bottom:0;
+		left:0;
+		right:0;
+		background-color: #262626;
+		padding-top: 40px;
+		padding-bottom: 40px;
+		color: rgba(255, 255, 255, 0.4);
+	}
 
 /* 16. SCROLL TO TOP */
 
