@@ -1,246 +1,197 @@
-{% extends "pledge/layout.html" %}
-{% block content %}
+{% extends "pledge/congressmanlist_layout.html" %}
+{% block content2 %}
 
 
-<div class="container">
-        <!-- ===========================
-        HEADER
-        ============================ -->
-        <div id="header" class="row">
-            {% load staticfiles %}
-            <div class="col-sm-2" style="overflow:hidden;">
-                <img class="propic img-rounded" src="{% static pledge.congressman.profile_image_path %}" alt="">
-            </div>
-            <!-- photo end-->
+<!-- ===========================
+BODY LEFT PART
+============================ -->
+<div class="col-md-8 mainleft">
+    <div id="statement" class="row mobmid">
+        <div class="col-sm-1">
+            <span class="secicon fa fa-user"></span>
+        </div><!--icon end-->
 
-            <div class="col-sm-10">
-                <div class="cv-title">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <h1>{{pledge.congressman}}</h1>
-                        </div>
-
-                    </div>
-                    <h2>국회의원</h2>
-                </div><!-- Title end-->
-
-
-                <div class="row">
-                    <div class="col-sm-4">
-                        <ul class="list-unstyled">
-                            <li><a href=""><span class="social fa fa-home"></span>{{pledge.congressman.party}}</a>
-                            </li>
-                        </ul>
-                    </div><!-- 정당-->
-
-                    <div class="col-sm-4">
-                        <ul class="list-unstyled">
-                            <li><a href=""><span class="social fa fa-skype"></span>{{pledge.congressman.constituency}}</a>
-                            </li>
-                        </ul>
-                    </div><!-- 선거구-->
-
-                    <div class="col-sm-4">
-                        <ul class="list-unstyled">
-                            <li><a href="mailto:support@evenfly.com"><span class="social fa fa-envelope-o"></span>{{pledge.congressman.email}}</a>
-                        </ul>
-                    </div><!-- 이메일-->
-                    </hr>
-                    <div class="col-sm-12">
-                    <ul class="list-unstyled">
-                    <li><a href=""><span class="social fa fa-facebook"></span>{{pledge.congressman.description}}</a></li>
-                    </ul>
-                    </div><!-- 국회의원 설명 -->
-                </div>
-            </div><!-- 국회의원 정보 끝-->
-        </div><!-- 국회의원 사진 + 정보 끝-->
-
-        <hr class="firsthr">
-
-
-    <div class="col-md-8 mainleft" style="background-color:#fff;">
-            <div id="statement" class="row mobmid">
-                <div class="col-sm-1">
-                    <span class="secicon fa fa-user"></span>
-                </div><!--icon end-->
-
-                <div class="col-sm-11 ">
-                    <h3 class="col-sm-8">공약상세내용</h3>
-
-                    <div class="col-sm-2"">
-                     <input type="button" class="like btn btn-primary" name="{{ pledge.pk }}" value="Like"  > <!-- 좋아요 버튼 -->
-                     <p id="like_count{{ pledge.pk }}" >count : {{ pledge.get_total_like }}</p> <!-- 좋아요 개수 표시 -->
-
-                     <input type="button" class="dislike btn btn-danger" name="{{ pledge.pk }}" value="Dislike" > <!-- 싫어요 버튼 -->
-                     <p id="dislike_count{{ pledge.pk }}">count : {{ pledge.get_total_dislike }}</p> <!-- 싫어요 개수 표시 -->
-                    </div>
-                </div>
-
-
-            <div id="education" class="row mobmid">
-                <div class="col-sm-1">
-                    <span class="secicon fa fa-graduation-cap"></span>
-                </div><!--icon end-->
-
-                <div class="col-sm-11">
-                    <h3>{{ pledge.title }}</h3>
-                    <h4> {{ pledge.description }}</h4>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h4>공약상태 : {{ pledge.status }}</h4>
-                        </div>
-
-                        <div class="year col-md-4">
-                            <p>{{ pledge.created_at }}</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                </div>
-            </div>
-    </div><!-- mainleft end-->
-
-         <form action="{% url "pledge:pledge_comment_new" pledge.pk %}" method="post">
-        {% csrf_token %}
-        {{ comment_form.message }}
-        <input type="submit" class="btn btn-primary btn-block" value="댓글 쓰기" />
-        </form>
-            <ul>
-        {% for comment in pledge.pledge_comment_set.all %}
-            <li>
-                {{ comment.message }}
-                <small>by {{ comment.user }}</small>
-
-                {% if comment.user == user %}
-                    <a href="{% url "pledge:pledge_comment_edit" pledge.pk comment.pk %}">Edit</a>
-                    <a href="{% url "pledge:pledge_comment_delete" pledge.pk comment.pk %}" class="text-danger">Delete</a>
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
-
-</div><!-- 어디에 매칭되는거지??-->
-
-
-    <div class="col-md-4 mainright">
+        <div class="col-sm-11 ">
+            <h3>공약제목</h3>
             <div class="row">
-                <div class="col-sm-1 col-md-2 mobmid">
-                    <span class="secicon fa fa-magic"></span>
-                </div><!--icon end-->
+                <div class="col-md-8">
+                    <p>{{ pledge.title }}</p>
+                </div>
+                <div class="col-md-4">
 
-                <div class="col-sm-11 col-md-10">
-                    <h3 class="mobmid">공약 신뢰도 </h3>
+                    <input type="button" class="like btn btn-primary" name="{{ pledge.pk }}" value="Like"  > <!-- 좋아요 버튼 -->
+                    <p id="like_count{{ pledge.pk }}" >count : {{ pledge.get_total_like }}</p> <!-- 좋아요 개수 표시 -->
 
-                    <p>진행 완료</p>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
-                            <span class="sr-only">65% Complete (success)</span>
-                        </div>
-                    </div><!--skill end-->
+                    <input type="button" class="dislike btn btn-danger" name="{{ pledge.pk }}" value="Dislike" > <!-- 싫어요 버튼 -->
+                    <p id="dislike_count{{ pledge.pk }}">count : {{ pledge.get_total_dislike }}</p> <!-- 싫어요 개수 표시 -->
 
-
-                    <p>진행 중</p>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-                            <span class="sr-only">85% Complete</span>
-                        </div>
-                    </div><!--skill end-->
-
-                    <p>미시행 공약</p>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                            <span class="sr-only">60% Complete (warning)</span>
-                        </div>
-                    </div><!--skill end-->
-
-                    <p>실패?</p>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-                            <span class="sr-only">30% Complete (danger)</span>
-                        </div>
-                    </div><!--skill end-->
-                </div><!--info end-->
-            </div><!--tech skills end-->
-
-            <hr>
-
-            <div class="row mobmid">
-                <div class="col-sm-1 col-md-2">
-                    <span class="secicon fa fa-trophy"></span>
-                </div><!--icon end-->
-
-                <div class="col-sm-11 col-md-10 ">
-                    <h3>Awards</h3>
-
-                    <div class="award">
-                        <h4>Best Designer 2012</h4>
-                        <p class="sub"><a href="">Life View Media Ltd.</a></p>
-                        <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration.</p>
-                    </div>
-                    <!--1st award end-->
-
-                    <div class="award">
-                        <h4>Best Designer 2011</h4>
-                        <p class="sub"><a href="">Alexa Design Solution</a></p>
-                        <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration, Information Design, Packaging Design and Website Design</p>
-                    </div><!--1st award end-->
-                </div><!--awards end-->
-
+                </div>
             </div>
+        </div>
+    </div>
 
-            <hr>
-
-
-        </div><!--mainright end-->
-    </div><!--container end-->
     <hr/>
 
+    <div id="education" class="row mobmid">
+        <div class="col-sm-1">
+            <span class="secicon fa fa-graduation-cap"></span>
+        </div><!--icon end-->
 
+        <div class="col-sm-11">
+            <h3>공약상세내용</h3>
+            <div class="row">
+                <div class="col-md-8">
+                    <p>{{ pledge.description }}</p>
+                </div>
+
+                <div class="year col-md-4">
+                    <p>{{ pledge.created_at }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <form action="{% url "pledge:pledge_comment_new" pledge.pk %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.message }}
+    <input type="submit" class="btn btn-primary btn-block" value="댓글 쓰기" />
+    </form>
+    <ul>
+        {% for comment in pledge.pledge_comment_set.all %}
+        <li>
+            {{ comment.message }}
+            <small>by {{ comment.user }}</small>
+
+            {% if comment.user == user %}
+            <a href="{% url "pledge:pledge_comment_edit" pledge.pk comment.pk %}">Edit</a>
+            <a href="{% url "pledge:pledge_comment_delete" pledge.pk comment.pk %}" class="text-danger">Delete</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+</div><!-- mainleft end-->
+
+<!-- ===========================
+BODY RIGHT PART
+=========================== -->
+<div class="col-md-4 mainright">
+
+
+    <div class="row mombid">
+        <div class="col-sm-1 col-md-2 mobmid">
+            <span class="secicon fa fa-magic"></span>
+        </div><!--icon end-->
+
+        <div class="col-sm-11 col-md-10">
+            <h3 class="mobmid">공약상태</h3>
+            <br/>
+
+            {% ifequal pledge.status "0" %}
+            <div class="alert alert-success" style="text-align:center">
+                <strong>시행완료</strong>
+            </div>
+            {% endifequal %}
+
+
+            {% ifequal pledge.status "1" %}
+            <div class="alert alert-info" style="text-align:center">
+                <strong>진행중</strong>
+            </div>
+            {% endifequal %}
+
+            {% ifequal pledge.status "2" %}
+            <p>실패</p>
+            <div class="alert alert-warning" style="text-align:center">
+                <strong>실패</strong>
+            </div>
+            {% endifequal %}
+
+            {% ifequal pledge.status "3" %}
+            <div class="alert alert-danger" style="text-align:center">
+                <strong>미시행</strong>
+            </div>
+            {% endifequal %}
+
+        </div><!--info end-->
+    </div><!--tech skills end-->
+
+    <hr/>
+
+    <div class="row mobmid">
+        <div class="col-sm-1 col-md-2">
+            <span class="secicon fa fa-trophy"></span>
+        </div><!--icon end-->
+
+        <div class="col-sm-11 col-md-10 ">
+            <h3>Awards</h3>
+
+            <div class="award">
+                <h4>Best Designer 2012</h4>
+                <p class="sub"><a href="">Life View Media Ltd.</a></p>
+                <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration.</p>
+            </div>
+            <!--1st award end-->
+
+            <div class="award">
+                <h4>Best Designer 2011</h4>
+                <p class="sub"><a href="">Alexa Design Solution</a></p>
+                <p>Studying all aspect of Graphic Design Including Advertising Design, Branding, Copy Exhibition Design, Ilustration, Information Design, Packaging Design and Website Design</p>
+            </div><!--1st award end-->
+        </div><!--awards end-->
+    </div>
+
+</div><!--mainright end-->
+</div><!--container end. layout과 연결-->
+
+<hr/>
 
 <script type="text/javascript">
-// 좋아요 버튼 처리
-// 버튼 클릭 > ajax통신 (like url로 전달) > views의 like 메소드에서 리턴하는 값 전달받기 > 성공시 콜백 호출
-$('.like').click(function(){
-  var pk = $(this).attr('name') // 클릭한 요소의 attribute 중 name의 값을 가져온다.
-  $.ajax({
-      url: "{% url 'pledge:pledge_like' pledge.pk %}", // 통신할 url을 지정한다.
-      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'}, // 서버로 데이터를 전송할 때 이 옵션을 사용한다.
-      dataType: "json", // 서버측에서 전송한 데이터를 어떤 형식의 데이터로서 해석할 것인가를 지정한다. 없으면 알아서 판단한다.
+    // 좋아요 버튼 처리
+    // 버튼 클릭 > ajax통신 (like url로 전달) > views의 like 메소드에서 리턴하는 값 전달받기 > 성공시 콜백 호출
+    $('.like').click(function(){
+        var pk = $(this).attr('name') // 클릭한 요소의 attribute 중 name의 값을 가져온다.
+        $.ajax({
+            url: "{% url 'pledge:pledge_like' pledge.pk %}", // 통신할 url을 지정한다.
+            data: {'csrfmiddlewaretoken': '{{ csrf_token }}'}, // 서버로 데이터를 전송할 때 이 옵션을 사용한다.
+            dataType: "json", // 서버측에서 전송한 데이터를 어떤 형식의 데이터로서 해석할 것인가를 지정한다. 없으면 알아서 판단한다.
 
-      success: function(response){
-        // 요청이 성공했을 경우 좋아요/싫어요 개수 레이블 업데이트
-        $('#like_count'+ pk).html("count : "+ response.like_count);
-        $('#dislike_count'+ pk).html("count : "+ response.dislike_count);
-      },
-      error:function(error){
-        // 요청이 실패했을 경우
-        alert(error)
-      }
-  });
-})
+            success: function(response){
+                // 요청이 성공했을 경우 좋아요/싫어요 개수 레이블 업데이트
+                $('#like_count'+ pk).html("count : "+ response.like_count);
+                $('#dislike_count'+ pk).html("count : "+ response.dislike_count);
+            },
+            error:function(error){
+                // 요청이 실패했을 경우
+                alert(error)
+            }
+        });
+    })
 
-// 싫어요 버튼 처리
-// 버튼 클릭 > ajax통신 (dislike url로 전달) > views의 dislike 메소드에서 리턴하는 값 전달받기 > 성공시 콜백 호출
-$('.dislike').click(function(){
-  var pk = $(this).attr('name') // 클릭한 요소의 attribute 중 name의 값을 가져온다.
-  $.ajax({
-      url: "{% url 'pledge:pledge_dislike' pledge.pk %}", // 통신할 url을 지정한다.
-      data: {'csrfmiddlewaretoken': '{{ csrf_token }}'}, // 서버로 데이터를 전송할 때 이 옵션을 사용한다.
-      dataType: "json", // 서버측에서 전송한 데이터를 어떤 형식의 데이터로서 해석할 것인가를 지정한다. 없으면 알아서 판단한다.
+    // 싫어요 버튼 처리
+    // 버튼 클릭 > ajax통신 (dislike url로 전달) > views의 dislike 메소드에서 리턴하는 값 전달받기 > 성공시 콜백 호출
+    $('.dislike').click(function(){
+        var pk = $(this).attr('name') // 클릭한 요소의 attribute 중 name의 값을 가져온다.
+        $.ajax({
+            url: "{% url 'pledge:pledge_dislike' pledge.pk %}", // 통신할 url을 지정한다.
+            data: {'csrfmiddlewaretoken': '{{ csrf_token }}'}, // 서버로 데이터를 전송할 때 이 옵션을 사용한다.
+            dataType: "json", // 서버측에서 전송한 데이터를 어떤 형식의 데이터로서 해석할 것인가를 지정한다. 없으면 알아서 판단한다.
 
-      success: function(response){
-        // 요청이 성공했을 경우 좋아요/싫어요 개수 레이블 업데이트
-        $('#like_count'+ pk).html("count : "+ response.like_count);
-        $('#dislike_count'+ pk).html("count : "+ response.dislike_count);
-      },
-      error:function(error){
-        // 요청이 실패했을 경우
-        alert(error)
-      }
-  });
-})
+            success: function(response){
+                // 요청이 성공했을 경우 좋아요/싫어요 개수 레이블 업데이트
+                $('#like_count'+ pk).html("count : "+ response.like_count);
+                $('#dislike_count'+ pk).html("count : "+ response.dislike_count);
+            },
+            error:function(error){
+                // 요청이 실패했을 경우
+                alert(error)
+            }
+        });
+    })
 </script>
+
 {% endblock %}
 
 
