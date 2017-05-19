@@ -30,7 +30,7 @@ BODY LEFT PART
                         <td>{{pledge.pk}}</td>
                         <td><a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge.title }}</a></td>
                         <td>{{pledge.description|truncatechars:10}}</td>
-                        <td>{{pledge.status}}</td>
+                        <td>{{pledge.get_status_display}}</td>
                     </tr><!-- 두번째 행 -->
 
                     {% endfor%}
