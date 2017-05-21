@@ -8,7 +8,6 @@
     <table class="table-responsive">
         <table class="table table-striped">
             <thead>
-                <th>공약 번호</th>
                 <!-- 국회의원별로 공약이 안 나눠져 있어 번호혼동됨 -->
                 <th>공약 제목</th>
                 <th>공약 설명</th>
@@ -17,9 +16,8 @@
             </thead>
             {% paginate 10 pledge_list %}
             {% for pledge in pledge_list %}
-            <tr>
-                <td>{{pledge.pk}}</td>
-                <td><a href="{% url 'pledge:pledge_detail' pledge.id %}">{{ pledge.title }}</a></td>
+            <tr onclick="location.href='{{ post.get_absolute_url }}'" style="cursor:pointer;">
+                <td>{{ pledge.title }}</td>
                 <td>{{pledge.description|truncatechars:10}}</td>
                 <td>
                 {{ pledge.get_status_display }}</td>
