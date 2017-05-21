@@ -1,0 +1,85 @@
+{% extends "pledge/layout.html" %}
+{% block content %}
+
+<div class="container">
+    <!-- ===========================
+    HEADER
+    ============================ -->
+    <div id="header" class="row">
+        {% load staticfiles %}
+        <div class="col-sm-2" style="overflow:hidden;">
+            {% if congressman %}
+            <img class="propic img-rounded" src="{% static congressman.profile_image_path %}" alt="">
+            {% else %}
+            <img class="propic img-rounded" src="{% static pledge.congressman.profile_image_path %}" alt="">
+            {% endif %}
+        </div>
+        <!-- photo end-->
+
+        <div class="col-sm-10">
+            <div class="cv-title">
+                <div class="row">
+                    <div class="col-sm-7">
+                        {% if congressman %}
+                        <h1>{{ congressman }}</h1>
+                        {% else %}
+                        <h1>{{ pledge.congressman }}</h1>
+                        {% endif %}
+                    </div>
+
+                </div>
+                <h2>국회의원</h2>
+            </div><!-- Title end-->
+
+            <!-- ===========================
+            국회의원 정보
+            ============================ -->
+            <div class="row">
+                <div class="col-sm-4">
+                    <ul class="list-unstyled">
+                        {% if congressman %}
+                        <li><a href=""><span class="social fa fa-home"></span>{{congressman.party}}</a></li>
+                        {% else %}
+                        <li><a href=""><span class="social fa fa-home"></span>{{pledge.congressman.party}}</a></li>
+                        {% endif %}
+                    </ul>
+                </div><!-- 정당 -->
+
+                <div class="col-sm-4">
+                    <ul class="list-unstyled">
+                        {% if congressman %}
+                        <li><a href=""><span class="social fa fa-cloud"></span>{{congressman.constituency}}</a></li>
+                        {% else %}
+                        <li><a href=""><span class="social fa fa-cloud"></span>{{pledge.congressman.constituency}}</a></li>
+                        {% endif %}
+                    </ul>
+                </div><!-- 선거구 -->
+
+                <div class="col-sm-4">
+                    <ul class="list-unstyled">
+                        {% if congressman %}
+                        <li><a href="mailto:support@evenfly.com"><span class="social fa fa-envelope-o"></span>{{congressman.email}}</a></li>
+                        {% else %}
+                        <li><a href="mailto:support@evenfly.com"><span class="social fa fa-envelope-o"></span>{{pledge.congressman.email}}</a></li>
+                        {% endif %}
+                    </ul>
+                </div><!-- 이메일 -->
+                </hr>
+                <div class="col-sm-12">
+                    <ul class="list-unstyled">
+                        {% if congressman %}
+                        <li><a href=""><span class="social fa fa-facebook"></span>{{congressman.description}}</a></li>
+                        {% else %}
+                        <li><a href=""><span class="social fa fa-facebook"></span>{{pledge.congressman.description}}</a></li>
+                        {% endif %}
+                    </ul>
+                </div><!-- 국회의원 설명 -->
+            </div><!-- 국회의원 정보 끝-->
+        </div>
+    </div><!-- 국회의원 사진 + 정보 끝 -->
+
+    <hr class="divideHr"/>
+    {% block content2 %}
+    {% endblock %}
+
+    {% endblock %}
