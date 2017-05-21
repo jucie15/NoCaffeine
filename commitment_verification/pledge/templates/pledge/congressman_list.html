@@ -4,12 +4,14 @@
 <div class='container' style="margin-top: 30px;">
     <div class="panel panel-default">
     <div class="panel-body">
-    <button class="btn btn-danger">자유한국당</button>
-    <button class="btn btn-primary">더불어민주당</button>
-    <button class="btn btn-success">국민의당</button>
-    <button class="btn btn-info">바른정당</button>
-    <button class="btn btn-warning">정의당</button>
-    <button class="btn btn-basic">무소속</button>
+    <button class="btn btn-default" name="total">전체</button>
+    <!-- 당의 class이름은 당 영어이름 기준으로 했음 -->
+    <button class="btn btn-primary" name="democratic">더불어민주당</button>
+    <button class="btn btn-danger" name="libertykorea">자유한국당</button>
+    <button class="btn btn-success" name="people">국민의당</button>
+    <button class="btn btn-info" name="bareun">바른정당</button>
+    <button class="btn btn-warning" name="justice">정의당</button>
+    <button class="btn btn-basic" name="independent">무소속</button>
     </div>
     </div>
     <div class="congressman-list-row" style="margin:0 auto;">
@@ -44,4 +46,29 @@
         </ul>
     </div>
 </div><!-- /.container -->
+
+<hr/>
+<script type="text/javascript">
+    //당선택 버튼 처리
+    $('.btn').click(function(){
+        var party = $(this).text(); //text값으로 당이름 받아오기
+        switch(party){
+            case '전체': location.href="/congressman"; //기본 국회의원리스트 페이지
+                        break;
+            case '더불어민주당':location.href="/congressman/party/1";
+                                break;
+            case '자유한국당':location.href="/congressman/party/2";
+                            break;
+            case '국민의당': location.href="/congressman/party/3";
+                            break;
+            case '바른정당': location.href="/congressman/party/4";
+                            break;
+            case '정의당': location.href="/congressman/party/5";
+                        break;
+            case '무소속': location.href="/congressman/party/6";
+                        break;
+            default: location.href="/congressman";
+        }
+    });
+</script>
 {% endblock %}
