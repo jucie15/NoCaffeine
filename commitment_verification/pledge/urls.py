@@ -4,7 +4,6 @@ from pledge import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^congressman/$', views.congressman_list, name='congressman_list'),
-    #url(r'^congressman/$', views.congressman_party, name='congressman_party'),
     url(r'^congressman/party/(?P<party>\d{1})?/$', views.congressman_party, name='congressman_party'),
     url(r'^congressman/(?P<cm_pk>\d+)/$', views.congressman_detail, name='congressman_detail'),
     url(r'^pledge/$', views.pledge_list, name='pledge_list'),
