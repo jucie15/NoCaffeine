@@ -23,3 +23,6 @@ https://goo.gl/445ssy
 
 한지연 : 45000(5.5지각)
 
+## 필요한 패키지 설치법
+1. pip install django-allauth
+2. pip install django-el-pagination

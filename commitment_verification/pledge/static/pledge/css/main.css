@@ -26,6 +26,7 @@
     max-width:600px;
     border-radius: 5px;
     text-align: left;
+    margin-top:7px;
 }
 .dropdown{
     display:inline-block;
