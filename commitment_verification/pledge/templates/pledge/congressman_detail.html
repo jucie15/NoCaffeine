@@ -55,21 +55,19 @@ BODY RIGHT PART
             <h3 class="mobmid">공약 신뢰도(공약 이행률)</h3>
             <br/>
             <div class="progress">
-                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:40%">
+                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:{{ pledge_status.not_enforcement }}%">
                     미시행
                 </div>
-                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" style="width:20%">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" style="width:{{ pledge_status.progress }}%">
                     진행중
                 </div>
-                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:30%">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:{{ pledge_status.complete }}%">
                     완료
                 </div>
-                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" style="width:10%">
+                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" style="width:{{ pledge_status.failed }}%">
                     실패
                 </div>
             </div>
-            <h5>: 시행완료[30%] + (진행중[20%] * 0.5) </h5>
-            <h3>= 40%</h3>
         </div><!--tech skills end-->
     </div>
 
