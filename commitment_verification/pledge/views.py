@@ -20,10 +20,32 @@ def congressman_list(request):
     context = {}
     context['congressman_list'] = congressman_list
 
-    return render(request,
-        'pledge/congressman_list.html',
-        context
-        )
+    return render(request, 'pledge/congressman_list.html',context)
+
+def congressman_party(request, party=0):
+    party_name='무소속' #default 값
+
+    if party == '1' :
+        party_name = "더불어민주당"
+    elif party == '2':
+        party_name = "자유한국당"
+    elif party == '3':
+        party_name = "국민의당"
+    elif party == '4':
+        party_name = '바른정당'
+    elif party == '5':
+        party_name = '정의당'
+    else:
+        party_name = '무소속' #party=='6'
+
+    condition = (Q(party__icontains=party_name))
+    congressman_list = CongressMan.objects.filter(condition)
+
+    context = {}
+    context['congressman_list'] = congressman_list
+    context['party'] = party
+    return render(request, 'pledge/congressman_list.html', context)
+
 
 def congressman_detail(request, cm_pk):
     # 국회의원 세부
